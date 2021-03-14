@@ -30,8 +30,8 @@ public abstract class BaseServiceImpl<T,ID> implements BaseService<T,ID>{
   }
 
   @Override
-  public Optional<T> save(T t) {
-    return (Optional<T>) getRepository().save(t);
+  public T save(T t) {
+    return getRepository().save(t);
   }
 
   @Transactional(readOnly = true)

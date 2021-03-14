@@ -7,7 +7,7 @@ public interface BaseService <T,ID> {
   List<T> findAll();
   Optional<T> findById(ID id);
   Boolean existById(ID id);
-  Optional<T> save(T t);
+  T save(T t);
   long count();
   void deleteById(ID id);
   void delete(T t);

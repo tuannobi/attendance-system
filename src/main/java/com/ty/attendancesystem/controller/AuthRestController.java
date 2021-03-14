@@ -90,22 +90,22 @@ public class AuthRestController {
       switch(role) {
         case "admin":
           Role adminRole = roleService.findByName(RoleName.ROLE_ADMIN.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin role is not found."));
           roles.add(adminRole);
           break;
         case "teacher":
           Role tRole = roleService.findByName(RoleName.ROLE_TEACHER.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Teacher role is not found."));
           roles.add(tRole);
           break;
         case "parent":
           Role prRole = roleService.findByName(RoleName.ROLE_PARENT.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Parent role is not found."));
           roles.add(prRole);
           break;
         default:
           Role stRole = roleService.findByName(RoleName.ROLE_STUDENT.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Student role is not found."));
           roles.add(stRole);
       }
     });
