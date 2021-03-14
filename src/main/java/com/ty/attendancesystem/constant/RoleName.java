@@ -1,4 +1,4 @@
-package com.ty.attendancesystem.model;
+package com.ty.attendancesystem.constant;
 
 public enum RoleName {
   ROLE_ADMIN,

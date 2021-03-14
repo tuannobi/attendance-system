@@ -4,10 +4,8 @@ import com.ty.attendancesystem.message.request.LoginRequest;
 import com.ty.attendancesystem.message.request.RegisterRequest;
 import com.ty.attendancesystem.message.response.JwtResponse;
 import com.ty.attendancesystem.model.Role;
-import com.ty.attendancesystem.model.RoleName;
+import com.ty.attendancesystem.constant.RoleName;
 import com.ty.attendancesystem.model.User;
-import com.ty.attendancesystem.repository.RoleRepository;
-import com.ty.attendancesystem.repository.UserRepository;
 import com.ty.attendancesystem.security.jwt.JwtProvider;
 import com.ty.attendancesystem.service.RoleService;
 import com.ty.attendancesystem.service.UserService;
@@ -21,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
