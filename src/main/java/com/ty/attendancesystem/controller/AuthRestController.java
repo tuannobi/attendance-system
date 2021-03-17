@@ -1,8 +1,8 @@
 package com.ty.attendancesystem.controller;
 
-import com.ty.attendancesystem.message.request.LoginRequest;
-import com.ty.attendancesystem.message.request.RegisterRequest;
-import com.ty.attendancesystem.message.response.JwtResponse;
+import com.ty.attendancesystem.message.jwt.request.LoginRequest;
+import com.ty.attendancesystem.message.jwt.request.RegisterRequest;
+import com.ty.attendancesystem.message.jwt.response.JwtResponse;
 import com.ty.attendancesystem.model.Role;
 import com.ty.attendancesystem.constant.RoleName;
 import com.ty.attendancesystem.model.User;
@@ -24,7 +24,7 @@ import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/api")
 public class AuthRestController {
   private AuthenticationManager authenticationManager;
 

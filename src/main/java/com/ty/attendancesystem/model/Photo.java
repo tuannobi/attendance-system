@@ -19,7 +19,7 @@ public class Photo {
   @Column(name = "image")
   private String image;
 
-  @Temporal(TemporalType.DATE)
+  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "create_at")
   private Date createAt;
 

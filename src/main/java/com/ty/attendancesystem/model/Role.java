@@ -3,6 +3,7 @@ package com.ty.attendancesystem.model;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "role")

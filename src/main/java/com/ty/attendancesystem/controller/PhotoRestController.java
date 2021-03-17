@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/rest/photos")
+@RequestMapping("/api/photos")
 public class PhotoRestController {
   private PhotoService photoService;
 

@@ -1,4 +1,4 @@
-package com.ty.attendancesystem.message.request;
+package com.ty.attendancesystem.message.jwt.request;
 
 public class LoginRequest {
   private String username;

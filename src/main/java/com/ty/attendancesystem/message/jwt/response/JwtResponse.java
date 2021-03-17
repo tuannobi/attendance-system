@@ -1,4 +1,4 @@
-package com.ty.attendancesystem.message.response;
+package com.ty.attendancesystem.message.jwt.response;
 
 public class JwtResponse {
   private String token;

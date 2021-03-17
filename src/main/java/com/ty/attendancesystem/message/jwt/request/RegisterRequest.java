@@ -1,6 +1,4 @@
-package com.ty.attendancesystem.message.request;
-
-import com.ty.attendancesystem.model.Role;
+package com.ty.attendancesystem.message.jwt.request;
 
 import java.util.Set;
 
