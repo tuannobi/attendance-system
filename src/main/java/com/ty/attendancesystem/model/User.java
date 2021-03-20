@@ -2,6 +2,8 @@ package com.ty.attendancesystem.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -19,6 +21,15 @@ public class User {
 
   @Column(name="email")
   private String email;
+
+  @Column(name="phone")
+  private String phone;
+
+  @Column(name = "full_name")
+  private String fullName;
+
+  @Column(name = "birthday")
+  private LocalDate birthday;
 
   @ManyToMany
   @JoinTable(name = "users_role",
@@ -73,5 +84,29 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
+  public LocalDate getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(LocalDate birthday) {
+    this.birthday = birthday;
   }
 }
