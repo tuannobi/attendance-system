@@ -112,8 +112,8 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>4.2.2</version>
 				<configuration>
-					<propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
-					<outputChangeLogFile>src/main/resources/db/output.xml</outputChangeLogFile>
+					<propertyFile>/db/liquibase.properties</propertyFile>
+					<outputChangeLogFile>/db/output.xml</outputChangeLogFile>
 				</configuration>
 			</plugin>
 		</plugins>

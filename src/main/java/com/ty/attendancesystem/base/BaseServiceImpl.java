@@ -1,5 +1,6 @@
 package com.ty.attendancesystem.base;
 
+import com.ty.attendancesystem.exception.ServiceException;
 import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
