@@ -7,6 +7,7 @@ import com.ty.attendancesystem.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role,Long> implements RoleS
     return this.roleRepository;
   }
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<Role> findByName(String name) {
     return roleRepository.findByName(name);

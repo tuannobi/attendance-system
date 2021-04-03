@@ -1,6 +1,8 @@
 package com.ty.attendancesystem.model;
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

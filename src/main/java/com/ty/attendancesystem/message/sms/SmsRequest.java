@@ -2,13 +2,10 @@ package com.ty.attendancesystem.message.sms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotBlank;
 
 public class SmsRequest {
-  @NotBlank
   private final String phoneNumber; //destination
 
-  @NotBlank
   private final String message;
 
   public SmsRequest(@JsonProperty("phoneNumber") String phoneNumber,

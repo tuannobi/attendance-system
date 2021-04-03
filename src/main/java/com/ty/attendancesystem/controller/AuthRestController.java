@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +48,7 @@ public class AuthRestController {
   }
 
   @PostMapping("/auth")
-  public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  public ResponseEntity authenticateUser(@RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
@@ -65,7 +64,7 @@ public class AuthRestController {
   }
 
   @PostMapping("/auth/signup")
-  public ResponseEntity registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+  public ResponseEntity registerUser(@RequestBody RegisterRequest signUpRequest) {
     if(userService.existsByUsername(signUpRequest.getUsername())) {
       return new ResponseEntity("Fail -> Username is already taken!",
           HttpStatus.BAD_REQUEST);
