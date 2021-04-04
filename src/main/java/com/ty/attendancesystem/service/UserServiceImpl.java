@@ -7,6 +7,7 @@ import com.ty.attendancesystem.repository.UserRepository;
 import com.ty.attendancesystem.util.DateTimeConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService{
 
   private UserRepository userRepository;
+  private PasswordEncoder passwordEncoder;
 
   @Autowired
-  public UserServiceImpl(UserRepository userRepository){
-    this.userRepository=userRepository;
+  public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -54,6 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
     return userRepository.updateInformationUser(id, birthDay, fullName, phone, email);
   }
 
+  //Insert
   @Transactional
   @Override
   public User save(User user) {
@@ -69,6 +73,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
     if (isDuplicatePhone) {
       throw new ServiceException("Phone is existed");
     }
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return super.save(user);
   }
 

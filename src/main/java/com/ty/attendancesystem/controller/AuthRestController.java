@@ -9,6 +9,7 @@ import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.security.jwt.JwtProvider;
 import com.ty.attendancesystem.service.RoleService;
 import com.ty.attendancesystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +36,7 @@ public class AuthRestController {
 
   private JwtProvider jwtProvider;
 
+  @Autowired
   public AuthRestController(AuthenticationManager authenticationManager,
       UserService userService,
       RoleService roleService,
@@ -63,52 +65,52 @@ public class AuthRestController {
     return ResponseEntity.ok(new JwtResponse(jwt));
   }
 
-  @PostMapping("/auth/signup")
-  public ResponseEntity registerUser(@RequestBody RegisterRequest signUpRequest) {
-    if(userService.existsByUsername(signUpRequest.getUsername())) {
-      return new ResponseEntity("Fail -> Username is already taken!",
-          HttpStatus.BAD_REQUEST);
-    }
-
-    if(userService.existsByEmail(signUpRequest.getEmail())) {
-      return new ResponseEntity("Fail -> Email is already in use!",
-          HttpStatus.BAD_REQUEST);
-    }
-
-    // Creating user's account
-    User user = new User(signUpRequest.getUsername(), passwordEncoder.encode(signUpRequest.getPassword()),
-        signUpRequest.getEmail());
-
-    Set<String> strRoles = signUpRequest.getRoles();
-    Set<Role> roles = new HashSet<>();
-
-    strRoles.forEach(role -> {
-      switch(role) {
-        case "admin":
-          Role adminRole = roleService.findByName(RoleName.ROLE_ADMIN.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin role is not found."));
-          roles.add(adminRole);
-          break;
-        case "teacher":
-          Role tRole = roleService.findByName(RoleName.ROLE_TEACHER.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Teacher role is not found."));
-          roles.add(tRole);
-          break;
-        case "parent":
-          Role prRole = roleService.findByName(RoleName.ROLE_PARENT.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Parent role is not found."));
-          roles.add(prRole);
-          break;
-        default:
-          Role stRole = roleService.findByName(RoleName.ROLE_STUDENT.name())
-              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Student role is not found."));
-          roles.add(stRole);
-      }
-    });
-
-    user.setRoles(roles);
-    userService.save(user);
-
-    return ResponseEntity.ok().body("User registered successfully!");
-  }
+//  @PostMapping("/auth/signup")
+//  public ResponseEntity registerUser(@RequestBody RegisterRequest signUpRequest) {
+//    if(userService.existsByUsername(signUpRequest.getUsername())) {
+//      return new ResponseEntity("Fail -> Username is already taken!",
+//          HttpStatus.BAD_REQUEST);
+//    }
+//
+//    if(userService.existsByEmail(signUpRequest.getEmail())) {
+//      return new ResponseEntity("Fail -> Email is already in use!",
+//          HttpStatus.BAD_REQUEST);
+//    }
+//
+//    // Creating user's account
+//    User user = new User(signUpRequest.getUsername(), passwordEncoder.encode(signUpRequest.getPassword()),
+//        signUpRequest.getEmail());
+//
+//    Set<String> strRoles = signUpRequest.getRoles();
+//    Set<Role> roles = new HashSet<>();
+//
+//    strRoles.forEach(role -> {
+//      switch(role) {
+//        case "admin":
+//          Role adminRole = roleService.findByName(RoleName.ROLE_ADMIN.name())
+//              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin role is not found."));
+//          roles.add(adminRole);
+//          break;
+//        case "teacher":
+//          Role tRole = roleService.findByName(RoleName.ROLE_TEACHER.name())
+//              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Teacher role is not found."));
+//          roles.add(tRole);
+//          break;
+//        case "parent":
+//          Role prRole = roleService.findByName(RoleName.ROLE_PARENT.name())
+//              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Parent role is not found."));
+//          roles.add(prRole);
+//          break;
+//        default:
+//          Role stRole = roleService.findByName(RoleName.ROLE_STUDENT.name())
+//              .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Student role is not found."));
+//          roles.add(stRole);
+//      }
+//    });
+//
+//    user.setRoles(roles);
+//    userService.save(user);
+//
+//    return ResponseEntity.ok().body("User registered successfully!");
+//  }
 }

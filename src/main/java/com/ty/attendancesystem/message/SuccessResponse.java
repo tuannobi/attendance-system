@@ -1,9 +1,11 @@
 package com.ty.attendancesystem.message;
 
+import javax.persistence.Entity;
+
 public class SuccessResponse {
-    Object data;
-    int code;
-    String message;
+    private Object data;
+    private int code;
+    private String message;
 
     public SuccessResponse() {
     }
@@ -16,6 +18,30 @@ public class SuccessResponse {
 
     public SuccessResponse(int code, String message) {
         this.code = code;
+        this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 }

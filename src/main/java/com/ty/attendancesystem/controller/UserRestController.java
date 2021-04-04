@@ -8,6 +8,7 @@ import com.ty.attendancesystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserRestController {
 
     public final UserService userService;
@@ -39,25 +41,31 @@ public class UserRestController {
         // Not yet validate for email pattern
         validateAddUser(user);
         User savedUser = userService.save(user);
-        return new ResponseEntity<>(
-                new SuccessResponse(savedUser, HttpStatus.CREATED.value(), ResponseMessage.ADD_SUCCESS),
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(new SuccessResponse(savedUser,
+                HttpStatus.CREATED.value(),
+                ResponseMessage.ADD_SUCCESS),HttpStatus.CREATED);
     }
 
     @PutMapping
-    void updateInfo(@RequestBody User user){
+    public ResponseEntity<?> updateInfo(@RequestBody User user){
         validateUpdateInfoUser(user);
-        int result = userService.updateInformationUser(user.getId(),
+        userService.updateInformationUser(user.getId(),
                 user.getBirthday(),
                 user.getFullName(),
                 user.getPhone(),
                 user.getEmail());
+        return new ResponseEntity<>(new SuccessResponse("",
+                    HttpStatus.OK.value(),
+                    ResponseMessage.UPDATE_SUCCESS), HttpStatus.OK);
     }
 
     @DeleteMapping
-    void delete(@RequestBody User user){
+    public ResponseEntity<?> delete(@RequestBody User user){
         validateDeleteUser(user);
         userService.delete(user);
+        return new ResponseEntity<>(new SuccessResponse("",
+                HttpStatus.OK.value(),
+                ResponseMessage.DELETE_SUCCESS), HttpStatus.OK);
     }
 
     private void validateAddUser(User user){
