@@ -18,6 +18,14 @@ public class AttendanceDetail {
     @Column(name = "status")
     private String status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_user_id")
+    private User studentId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id")
+    private Class clazz;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +48,21 @@ public class AttendanceDetail {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(User studentId) {
+        this.studentId = studentId;
+    }
+
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
     }
 }
