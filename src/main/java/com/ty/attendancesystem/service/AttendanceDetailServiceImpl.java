@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetail,Long> implements AttendanceDetailService {
@@ -29,7 +30,9 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
   public AttendanceDetail insert(AttendanceDetail attendanceDetail) {
     if (checkIfStudentAttended()){
       attendanceDetail.setTime(LocalDateTime.now());
-      return attendanceDetailRepository.save(attendanceDetail);
+      AttendanceDetail result = attendanceDetailRepository.save(attendanceDetail);
+      attendanceDetailRepository.refresh(result);
+      return result;
     }
     return null;
   }

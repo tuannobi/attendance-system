@@ -18,11 +18,11 @@ public class AttendanceDetail {
     @Column(name = "status")
     private int status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_user_id")
     private User student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
     private Class clazz;
 

@@ -30,6 +30,7 @@ public abstract class BaseServiceImpl<T,ID> implements BaseService<T,ID>{
     return getRepository().existsById(id);
   }
 
+  @Transactional
   @Override
   public T save(T t) {
     return getRepository().save(t);
@@ -41,11 +42,13 @@ public abstract class BaseServiceImpl<T,ID> implements BaseService<T,ID>{
     return getRepository().count();
   }
 
+  @Transactional
   @Override
   public void deleteById(ID id) {
     getRepository().deleteById(id);
   }
 
+  @Transactional
   @Override
   public void delete(T t) {
     getRepository().delete(t);
