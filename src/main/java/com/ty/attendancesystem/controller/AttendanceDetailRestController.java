@@ -37,7 +37,7 @@ public class AttendanceDetailRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(AttendanceDetail attendanceDetail) {
+    public ResponseEntity<?> add(@RequestBody AttendanceDetail attendanceDetail) {
         validateAddAttendance(attendanceDetail);
         AttendanceDetail savedStudent = attendanceDetailService.insert(attendanceDetail);
         return new ResponseEntity<>(new SuccessResponse(savedStudent,
@@ -46,11 +46,8 @@ public class AttendanceDetailRestController {
     }
 
     private void validateAddAttendance(AttendanceDetail attendanceDetail) {
-        if (attendanceDetail.getStatus() == null) {
-            throw new ValidateException("Status field must not be null");
-        }
-        if (attendanceDetail.getStatus().trim().isEmpty()) {
-            throw new ValidateException("Status field must not be blank");
+        if (attendanceDetail.getId() != null) {
+            throw new ValidateException("Id field must be null");
         }
     }
 }

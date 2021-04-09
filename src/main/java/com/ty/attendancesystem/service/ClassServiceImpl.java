@@ -55,7 +55,7 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
 
   private AtomicBoolean checkIfUserIsTeacher(Class clazz){
     AtomicBoolean result = new AtomicBoolean(true);
-    Optional<User> user = userRepository.findById(clazz.getUser().getId());
+    Optional<User> user = userRepository.findById(clazz.getTeacher().getId());
     if (user.isPresent()) {
       user.get().getRoles().forEach(role -> {
         if (!role.getName().equals(RoleName.ROLE_TEACHER.toString())) {

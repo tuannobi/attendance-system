@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetail,Long> implements AttendanceDetailService {
   private AttendanceDetailRepository attendanceDetailRepository;
@@ -25,7 +27,8 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
   @Transactional
   @Override
   public AttendanceDetail insert(AttendanceDetail attendanceDetail) {
-    if (!checkIfStudentAttended()){
+    if (checkIfStudentAttended()){
+      attendanceDetail.setTime(LocalDateTime.now());
       return attendanceDetailRepository.save(attendanceDetail);
     }
     return null;

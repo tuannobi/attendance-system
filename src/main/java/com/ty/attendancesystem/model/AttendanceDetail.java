@@ -16,13 +16,13 @@ public class AttendanceDetail {
     private LocalDateTime time;
 
     @Column(name = "status")
-    private String status;
+    private int status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "student_user_id")
-    private User studentId;
+    private User student;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "class_id")
     private Class clazz;
 
@@ -42,20 +42,20 @@ public class AttendanceDetail {
         this.time = time;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public User getStudentId() {
-        return studentId;
+    public User getStudent() {
+        return student;
     }
 
-    public void setStudentId(User studentId) {
-        this.studentId = studentId;
+    public void setStudent(User student) {
+        this.student = student;
     }
 
     public Class getClazz() {

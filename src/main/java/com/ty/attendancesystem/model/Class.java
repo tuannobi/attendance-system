@@ -20,18 +20,18 @@ public class Class {
 
     @ManyToOne
     @JoinColumn(name = "teacher_user_id")
-    private User user;
+    private User teacher;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
-    public User getUser() {
-        return user;
+    public User getTeacher() {
+        return teacher;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
     }
 
     public Course getCourse() {
