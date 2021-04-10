@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -35,8 +36,8 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
   @Transactional
   @Override
   public Class insert(Class clazz) {
-    if (!checkifClassIsExisted(clazz)) {
-      if (checkIfUserIsTeacher(clazz).get()){
+    if (!checkIfClassIsExisted(clazz)) {
+      if (checkIfClassHasUserIsTeacher(clazz).get()){
         clazz.setStatus(ClassStatus.OPENED);
         return classRepository.save(clazz);
       } else {
@@ -53,7 +54,16 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
     return null;
   }
 
-  private AtomicBoolean checkIfUserIsTeacher(Class clazz){
+  @Transactional(readOnly = true)
+  @Override
+  public List<String> findClassIdByTeacherUsername(String id) {
+    if (!checkIfUsernameIsTeacher(id).get()){
+      throw new ServiceException("User is not Teacher role");
+    }
+    return classRepository.findClassIdByTeacherUsername(id);
+  }
+
+  private AtomicBoolean checkIfClassHasUserIsTeacher(Class clazz){
     AtomicBoolean result = new AtomicBoolean(true);
     Optional<User> user = userRepository.findById(clazz.getTeacher().getId());
     if (user.isPresent()) {
@@ -68,7 +78,22 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
     return result;
   }
 
-  private boolean checkifClassIsExisted(Class clazz) {
+  private AtomicBoolean checkIfUsernameIsTeacher(String username){
+    AtomicBoolean result = new AtomicBoolean(true);
+    Optional<User> user = userRepository.findByUsername(username);
+    if (user.isPresent()) {
+      user.get().getRoles().forEach(role -> {
+        if (!role.getName().equals(RoleName.ROLE_TEACHER.toString())) {
+          result.set(false);
+        }
+      });
+    } else {
+      throw new ServiceException("User is not existed");
+    }
+    return result;
+  }
+
+  private boolean checkIfClassIsExisted(Class clazz) {
     return classRepository.existsById(clazz.getId());
   }
 

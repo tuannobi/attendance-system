@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/classes")
 public class ClassRestController {
-    public final ClassService classService;
+    private final ClassService classService;
 
     @Autowired
     public ClassRestController(ClassService classService){
@@ -31,6 +31,11 @@ public class ClassRestController {
     @GetMapping("/{id}")
     public Optional<Class> get(@PathVariable("id") String id){
         return classService.findById(id);
+    }
+
+    @GetMapping("/teacher/{username}")
+    public List<String> getAllByTeacher(@PathVariable("username") String id){
+        return classService.findClassIdByTeacherUsername(id);
     }
 
     @PostMapping
