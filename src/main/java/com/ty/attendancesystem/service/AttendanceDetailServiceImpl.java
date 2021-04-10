@@ -1,6 +1,7 @@
 package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
+import com.ty.attendancesystem.constant.AttendanceStatus;
 import com.ty.attendancesystem.model.AttendanceDetail;
 import com.ty.attendancesystem.repository.AttendanceDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
   public AttendanceDetail insert(AttendanceDetail attendanceDetail) {
     if (checkIfStudentAttended()){
       attendanceDetail.setTime(LocalDateTime.now());
+      attendanceDetail.setStatus(AttendanceStatus.ATTENDED);
       AttendanceDetail result = attendanceDetailRepository.save(attendanceDetail);
       attendanceDetailRepository.refresh(result);
       return result;
