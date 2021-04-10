@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User,String> implements UserService{
 
   private UserRepository userRepository;
   private PasswordEncoder passwordEncoder;
@@ -27,7 +27,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
   }
 
   @Override
-  protected JpaRepository<User, Long> getRepository() {
+  protected JpaRepository<User, String> getRepository() {
     return this.userRepository;
   }
 
@@ -51,9 +51,8 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
 
   @Transactional
   @Override
-  public int updateInformationUser(Long id, LocalDate birthDay, String fullName, String phone, String email) {
+  public int updateInformationUser(String id, LocalDate birthDay, String fullName, String phone, String email) {
     String stringBirthDay = DateTimeConvertUtil.convertLocalDateToString(birthDay);
-    System.out.println(stringBirthDay);
     return userRepository.updateInformationUser(id, birthDay, fullName, phone, email);
   }
 

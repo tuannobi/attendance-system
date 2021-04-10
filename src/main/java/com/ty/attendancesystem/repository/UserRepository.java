@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, String>{
   Optional<User> findByUsername(String username);
   Boolean existsByUsername(String username);
   Boolean existsByEmail(String email);
@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
           " fullName = :fullName," +
           " birthday = :birthday" +
           " where id = :id")
-  int updateInformationUser(Long id, LocalDate birthday, String fullName, String phone, String email);
+  int updateInformationUser(String id, LocalDate birthday, String fullName, String phone, String email);
 }

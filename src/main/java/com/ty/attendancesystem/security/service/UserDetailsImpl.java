@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
-  private Long id;
+  private String id;
 
   private String username;
 
@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
 
   private Collection authorities;
 
-  public UserDetailsImpl(Long id, String username, String password, String email, Collection authorities) {
+  public UserDetailsImpl(String id, String username, String password, String email, Collection authorities) {
     this.id = id;
     this.username = username;
     this.password = password;

@@ -1,12 +1,12 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <changeSet author="Tuan (generated)" id="1617521950855-1">
+    <changeSet author="Tuan (generated)" id="1618025159595-1">
         <createTable tableName="attendance_detail">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="attendance_detail_pkey"/>
             </column>
             <column name="time" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="student_user_id" type="BIGINT">
+            <column name="student_user_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="class_id" type="VARCHAR(100)">
@@ -15,7 +15,7 @@
             <column name="status" type="SMALLINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-2">
+    <changeSet author="Tuan (generated)" id="1618025159595-2">
         <createTable tableName="class">
             <column name="id" type="VARCHAR(100)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="class_pkey"/>
@@ -23,15 +23,15 @@
             <column name="course_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="teacher_user_id" type="BIGINT">
+            <column name="teacher_user_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="start_date" type="DATE"/>
-            <column name="end_date" type="DATE"/>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
             <column name="status" type="SMALLINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-3">
+    <changeSet author="Tuan (generated)" id="1618025159595-3">
         <createTable tableName="course">
             <column name="id" type="VARCHAR(100)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="course_pkey"/>
@@ -39,9 +39,9 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-4">
+    <changeSet author="Tuan (generated)" id="1618025159595-4">
         <createTable tableName="users">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column name="id" type="VARCHAR(100)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
             </column>
             <column name="username" type="VARCHAR(100)"/>
@@ -52,7 +52,7 @@
             <column name="birthday" type="date"/>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-5">
+    <changeSet author="Tuan (generated)" id="1618025159595-5">
         <createTable tableName="photo">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="photo_pkey"/>
@@ -60,14 +60,14 @@
             <column name="title" type="VARCHAR(255)"/>
             <column name="image" type="VARCHAR(500)"/>
             <column name="create_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="users_id" type="BIGINT">
+            <column name="users_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-6">
+    <changeSet author="Tuan (generated)" id="1618025159595-6">
         <createTable tableName="student_class">
-            <column name="student_user_id" type="BIGINT">
+            <column name="student_user_id" type="VARCHAR(100)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="student_class_pkey"/>
             </column>
             <column name="class_id" type="VARCHAR(100)">
@@ -75,7 +75,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-7">
+    <changeSet author="Tuan (generated)" id="1618025159595-7">
         <createTable tableName="role">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="role_pkey"/>
@@ -83,9 +83,9 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-8">
+    <changeSet author="Tuan (generated)" id="1618025159595-8">
         <createTable tableName="users_role">
-            <column name="users_id" type="BIGINT">
+            <column name="users_id" type="VARCHAR(100)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_role_pkey"/>
             </column>
             <column name="role_id" type="BIGINT">
@@ -93,31 +93,31 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-9">
+    <changeSet author="Tuan (generated)" id="1618025159595-9">
         <addForeignKeyConstraint baseColumnNames="class_id" baseTableName="attendance_detail" constraintName="fkattendance955661" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="class" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-10">
+    <changeSet author="Tuan (generated)" id="1618025159595-10">
         <addForeignKeyConstraint baseColumnNames="class_id" baseTableName="student_class" constraintName="fkstudent_cl932294" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="class" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-11">
+    <changeSet author="Tuan (generated)" id="1618025159595-11">
         <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="class" constraintName="fkclass8123" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="course" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-12">
+    <changeSet author="Tuan (generated)" id="1618025159595-12">
         <addForeignKeyConstraint baseColumnNames="users_id" baseTableName="photo" constraintName="fkphoto341608" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-13">
+    <changeSet author="Tuan (generated)" id="1618025159595-13">
         <addForeignKeyConstraint baseColumnNames="student_user_id" baseTableName="student_class" constraintName="fkstudent_cl492341" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-14">
+    <changeSet author="Tuan (generated)" id="1618025159595-14">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users_role" constraintName="fkusers_role700935" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-15">
+    <changeSet author="Tuan (generated)" id="1618025159595-15">
         <addForeignKeyConstraint baseColumnNames="users_id" baseTableName="users_role" constraintName="fkusers_role80774" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-16">
+    <changeSet author="Tuan (generated)" id="1618025159595-16">
         <addForeignKeyConstraint baseColumnNames="student_user_id" baseTableName="attendance_detail" constraintName="fkattendance515708" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="Tuan (generated)" id="1617521950855-17">
+    <changeSet author="Tuan (generated)" id="1618025159595-17">
         <addForeignKeyConstraint baseColumnNames="teacher_user_id" baseTableName="class" constraintName="fkclass802208" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
 </databaseChangeLog>

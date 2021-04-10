@@ -32,7 +32,7 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public Optional<User> get(@PathVariable("id") Long id){
+    public Optional<User> get(@PathVariable("id") String id){
         return userService.findById(id);
     }
 
@@ -69,11 +69,14 @@ public class UserRestController {
     }
 
     private void validateAddUser(User user){
-        if (user.getId() != null){
-            throw new ValidateException("Please ignoring User id field");
+        if (user.getId() == null) {
+            throw new ValidateException("Id field must not be null");
         }
         if (user.getUsername() == null) {
             throw new ValidateException("Username field must not be null");
+        }
+        if (user.getId().trim().isEmpty()) {
+            throw new ValidateException("Id field must not be blank");
         }
         if (user.getUsername().trim().isEmpty()) {
             throw new ValidateException("Username field must not be blank");
