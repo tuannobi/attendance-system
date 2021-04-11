@@ -2,6 +2,7 @@ package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.constant.AttendanceStatus;
+import com.ty.attendancesystem.exception.ServiceException;
 import com.ty.attendancesystem.model.AttendanceDetail;
 import com.ty.attendancesystem.repository.AttendanceDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +30,23 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
   @Transactional
   @Override
   public AttendanceDetail insert(AttendanceDetail attendanceDetail) {
-    if (checkIfStudentAttended()){
+    if (!checkIfStudentIsTakeAttendanceOrNot(attendanceDetail.getStudent().getId(),attendanceDetail.getClazz().getId())){
       attendanceDetail.setTime(LocalDateTime.now());
       attendanceDetail.setStatus(AttendanceStatus.ATTENDED);
       AttendanceDetail result = attendanceDetailRepository.save(attendanceDetail);
       attendanceDetailRepository.refresh(result);
       return result;
+    } else {
+      throw new ServiceException("Student user took attendance in this class before");
     }
-    return null;
   }
 
-  private boolean checkIfStudentAttended() {
-    return true;
+  private boolean checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId) {
+    int resultCount = attendanceDetailRepository.checkIfStudentIsTakeAttendanceOrNot(studentId, classId);
+    if (resultCount>0){
+      return true;
+    }
+    return false;
   }
+
 }
