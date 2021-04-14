@@ -1,16 +1,13 @@
 package com.ty.attendancesystem.controller;
 
+import com.ty.attendancesystem.message.jwt.request.JwtRequest;
 import com.ty.attendancesystem.message.jwt.request.LoginRequest;
-import com.ty.attendancesystem.message.jwt.request.RegisterRequest;
 import com.ty.attendancesystem.message.jwt.response.JwtResponse;
-import com.ty.attendancesystem.model.Role;
-import com.ty.attendancesystem.constant.RoleName;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.security.jwt.JwtProvider;
 import com.ty.attendancesystem.service.RoleService;
 import com.ty.attendancesystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -47,6 +43,12 @@ public class AuthRestController {
     this.roleService=roleService;
     this.passwordEncoder=passwordEncoder;
     this.jwtProvider = jwtProvider;
+  }
+
+  @GetMapping("/auth")
+  public Optional<User> getUserFromToken(@RequestBody JwtRequest jwtRequest) {
+    String username = jwtProvider.getUserNameFromJwtToken(jwtRequest.getToken());
+    return userService.findByUsername(username);
   }
 
   @PostMapping("/auth")
