@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,16 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     } else {
       throw new ServiceException("Student user took attendance in this class before");
     }
+  }
+
+  @Override
+  public List<AttendanceDetail> getAttendanceDetailsStudent(String studentId) {
+    return attendanceDetailRepository.getAttendanceDetailsByStudent_IdOrderByTimeAsc(studentId);
+  }
+
+  @Override
+  public AttendanceDetail updateAttendanceDetails(AttendanceDetail attendanceDetail) {
+    return attendanceDetailRepository.updateAttendanceDetails(attendanceDetail.getId(), attendanceDetail.getStatus());
   }
 
   private boolean checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId) {

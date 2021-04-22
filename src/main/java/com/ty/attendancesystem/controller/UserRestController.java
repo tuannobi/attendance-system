@@ -40,7 +40,7 @@ public class UserRestController {
     public ResponseEntity<?> add(@RequestBody User user){
         // Not yet validate for email pattern
         validateAddUser(user);
-        User savedUser = userService.save(user);
+        User savedUser = userService.insert(user);
         return new ResponseEntity<>(new SuccessResponse(savedUser,
                 HttpStatus.CREATED.value(),
                 ResponseMessage.ADD_SUCCESS),HttpStatus.CREATED);

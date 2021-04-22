@@ -11,4 +11,6 @@ public interface UserService extends BaseService<User, String> {
   Boolean existsByUsername(String username);
   Boolean existsByEmail(String email);
   int updateInformationUser(String id, LocalDate birthDay, String fullName, String phone, String email);
+
+    User insert(User user);
 }

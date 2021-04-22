@@ -1,6 +1,5 @@
 package com.ty.attendancesystem.controller;
 
-import com.ty.attendancesystem.message.jwt.request.JwtRequest;
 import com.ty.attendancesystem.message.jwt.request.LoginRequest;
 import com.ty.attendancesystem.message.jwt.response.JwtResponse;
 import com.ty.attendancesystem.model.User;
@@ -46,8 +45,8 @@ public class AuthRestController {
   }
 
   @GetMapping("/auth")
-  public Optional<User> getUserFromToken(@RequestBody JwtRequest jwtRequest) {
-    String username = jwtProvider.getUserNameFromJwtToken(jwtRequest.getToken());
+  public Optional<User> getUserFromToken(@RequestHeader("Authorization") String token) {
+    String username = jwtProvider.getUserNameFromJwtToken(token.substring(7));
     return userService.findByUsername(username);
   }
 

@@ -51,7 +51,12 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
   @Transactional
   @Override
   public Class update(Class clazz) {
-    return null;
+      if (checkIfClassHasUserIsTeacher(clazz).get()){
+        clazz.setStatus(ClassStatus.OPENED);
+        return classRepository.save(clazz);
+      } else {
+        throw new ServiceException("User is not Teacher role");
+      }
   }
 
   @Transactional(readOnly = true)

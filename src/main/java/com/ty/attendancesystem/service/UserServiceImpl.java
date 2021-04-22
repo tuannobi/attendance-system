@@ -56,13 +56,16 @@ public class UserServiceImpl extends BaseServiceImpl<User,String> implements Use
     return userRepository.updateInformationUser(id, birthDay, fullName, phone, email);
   }
 
-  //Insert
   @Transactional
   @Override
-  public User save(User user) {
+  public User insert(User user) {
     Boolean isDuplicateUsername = userRepository.existsByUsername(user.getUsername());
     Boolean isDuplicateEmail = userRepository.existsByEmail(user.getEmail());
     Boolean isDuplicatePhone = userRepository.existsByPhone(user.getPhone());
+    Boolean isDuplicateId = userRepository.existsById(user.getId());
+    if (isDuplicateId) {
+      throw  new ServiceException("Id is existed");
+    }
     if (isDuplicateUsername) {
       throw new ServiceException("Username is existed");
     }

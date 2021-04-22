@@ -1,8 +1,10 @@
 package com.ty.attendancesystem.controller;
 
 import com.ty.attendancesystem.constant.ResponseMessage;
+import com.ty.attendancesystem.exception.ValidateException;
 import com.ty.attendancesystem.message.SuccessResponse;
 import com.ty.attendancesystem.model.Class;
+import com.ty.attendancesystem.model.Course;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,37 @@ public class ClassRestController {
                 ResponseMessage.ADD_SUCCESS),HttpStatus.CREATED);
     }
 
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Class clazz) {
+        validateUpdateClass(clazz);
+        Class savedClass = classService.update(clazz);
+        return new ResponseEntity<>(new SuccessResponse(savedClass,
+                HttpStatus.OK.value(),
+                ResponseMessage.UPDATE_SUCCESS), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestBody Class clazz){
+        validateDeleteClass(clazz);
+        classService.delete(clazz);
+        return new ResponseEntity<>(new SuccessResponse("",
+                HttpStatus.OK.value(),
+                ResponseMessage.DELETE_SUCCESS), HttpStatus.OK);
+    }
+
+    private void validateDeleteClass(Class clazz) {
+    }
+
     private void validateAddClass(Class clazz) {
 
+    }
+
+    private void validateUpdateClass(Class clazz){
+        if (clazz.getId() == null) {
+            throw new ValidateException("Id must not be null");
+        }
+        if (clazz.getId().trim().isEmpty()) {
+            throw new ValidateException("Id must not be blank");
+        }
     }
 }
