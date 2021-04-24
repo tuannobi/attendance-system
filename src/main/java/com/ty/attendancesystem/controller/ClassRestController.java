@@ -40,6 +40,11 @@ public class ClassRestController {
         return classService.findClassIdByTeacherUsername(id);
     }
 
+    @GetMapping("/course/{courseId}")
+    public List<Class> getClassesByCourseId(@PathVariable("courseId") String courseId) {
+        return classService.findClassesByCourseId(courseId);
+    }
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Class clazz){
         validateAddClass(clazz);

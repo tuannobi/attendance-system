@@ -68,6 +68,12 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
     return classRepository.findClassIdByTeacherUsername(id);
   }
 
+  @Transactional(readOnly = true)
+  @Override
+  public List<Class> findClassesByCourseId(String courseId) {
+    return classRepository.findClassesByCourse_Id(courseId);
+  }
+
   private AtomicBoolean checkIfClassHasUserIsTeacher(Class clazz){
     AtomicBoolean result = new AtomicBoolean(true);
     Optional<User> user = userRepository.findById(clazz.getTeacher().getId());

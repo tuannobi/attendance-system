@@ -9,4 +9,5 @@ public interface ClassService extends BaseService<Class, String> {
     Class insert(Class course);
     Class update(Class course);
     List<String> findClassIdByTeacherUsername(String id);
+    List<Class> findClassesByCourseId(String courseId);
 }

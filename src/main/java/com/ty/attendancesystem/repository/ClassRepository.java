@@ -13,4 +13,6 @@ public interface ClassRepository extends JpaRepository<Class, String> {
     @Query(value = "select id from class where teacher_user_id =" +
             " (select id from users where username = :username)", nativeQuery = true)
     List<String> findClassIdByTeacherUsername(String username);
+
+    List<Class> findClassesByCourse_Id(String courseId);
 }
