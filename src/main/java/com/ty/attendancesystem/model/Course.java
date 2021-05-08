@@ -25,10 +25,6 @@ public class Course {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "course")
-    @JsonIgnore
-    private List<TimeTableCourse> timeTableCourses;
-
     public String getId() {
         return id;
     }
@@ -45,20 +41,11 @@ public class Course {
         this.name = name;
     }
 
-    public List<TimeTableCourse> getTimeTableCourses() {
-        return timeTableCourses;
-    }
-
-    public void setTimeTableCourses(List<TimeTableCourse> timeTableCourses) {
-        this.timeTableCourses = timeTableCourses;
-    }
-
     @Override
     public String toString() {
         return "Course{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", timeTableCourses=" + timeTableCourses +
                 '}';
     }
 }

@@ -24,9 +24,9 @@
             <column name="username" value="admin" />
             <column name="password" value="$2y$12$tXDQcrt3M8tqwRr0/l2ZX.llS4Zgy8A4OfxBXDJ2dLvMpqc9yM4qq"/>
             <column name="email" value="admin@gmail.com"/>
-            <column name="phone" value="0214574125"/>
-            <column name="full_name" value="Tran Anh Tuan"/>
-            <column name="birthday" value="1999/12/12"/>
+            <column name="phone" value="0123456789"/>
+            <column name="full_name" value="Admin"/>
+            <column name="birthday" value="1989/01/12"/>
         </insert>
     </changeSet>
     <changeSet id="3" author="Tuan">
@@ -35,39 +35,72 @@
             <column name="username" value="teacher" />
             <column name="password" value="$2y$12$OezJT.cakt0n71tUNXYtOOSuRWoYcqRkPeElTKKNmGsrBnEANY3N6"/>
             <column name="email" value="teacher@gmail.com"/>
-            <column name="phone" value="0214578452"/>
-            <column name="full_name" value="Ho Tran Nhat Thuy"/>
-            <column name="birthday" value="1985/12/12"/>
+            <column name="phone" value="0147852365"/>
+            <column name="full_name" value="Hồ Trần Nhật Thủy"/>
+            <column name="birthday" value="1985/12/06"/>
         </insert>
     </changeSet>
     <changeSet id="4" author="Tuan">
         <insert tableName="users">
-            <column name="id" value="17521284"/>
-            <column name="username" value="student" />
+            <column name="id" value="17521224"/>
+            <column name="username" value="tuan" />
             <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
             <column name="email" value="tuantrananhit@gmail.com"/>
             <column name="phone" value="0214512541"/>
-            <column name="full_name" value="Le Van Suy"/>
-            <column name="birthday" value="1998/4/5"/>
+            <column name="full_name" value="Trần Anh Tuân"/>
+            <column name="birthday" value="1999/12/12"/>
         </insert>
     </changeSet>
     <changeSet id="5" author="Tuan">
+        <insert tableName="users">
+            <column name="id" value="17521284"/>
+            <column name="username" value="huuy" />
+            <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
+            <column name="email" value="huynhuuy@gmail.com"/>
+            <column name="phone" value="0145478452"/>
+            <column name="full_name" value="Huỳnh Hữu Ý"/>
+            <column name="birthday" value="1999/06/12"/>
+        </insert>
+    </changeSet>
+    <changeSet id="6" author="Tuan">
+        <insert tableName="users">
+            <column name="id" value="PR0000"/>
+            <column name="username" value="parent" />
+            <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
+            <column name="email" value="parent@gmail.com"/>
+            <column name="phone" value="0214587452"/>
+            <column name="full_name" value="Lê Công Đạt"/>
+            <column name="birthday" value="1978/06/12"/>
+        </insert>
+    </changeSet>
+    <changeSet id="7" author="Tuan">
         <insert tableName="users_role">
             <column name="users_id" value="AD0000"/>
             <column name="role_id" value="1"/>
         </insert>
     </changeSet>
-    <changeSet id="6" author="Tuan">
+    <changeSet id="8" author="Tuan">
         <insert tableName="users_role">
             <column name="users_id" value="GV0000"/>
             <column name="role_id" value="2"/>
         </insert>
     </changeSet>
-    <changeSet id="7" author="Tuan">
+    <changeSet id="9" author="Tuan">
         <insert tableName="users_role">
             <column name="users_id" value="17521284"/>
             <column name="role_id" value="4"/>
         </insert>
     </changeSet>
-
+    <changeSet id="10" author="Tuan">
+        <insert tableName="users_role">
+            <column name="users_id" value="PR0000"/>
+            <column name="role_id" value="3"/>
+        </insert>
+    </changeSet>
+    <changeSet id="11" author="Tuan">
+        <insert tableName="users_role">
+            <column name="users_id" value="17521224"/>
+            <column name="role_id" value="4"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

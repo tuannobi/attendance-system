@@ -22,8 +22,8 @@ public class TimeTableCourse {
     private TimeTable timeTable;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @JoinColumn(name = "class_id")
+    private Class clazz;
 
     //additional fields
     @Column(name = "lesson_start")
@@ -54,12 +54,12 @@ public class TimeTableCourse {
         this.timeTable = timeTable;
     }
 
-    public Course getCourse() {
-        return course;
+    public Class getClazz() {
+        return clazz;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
     }
 
     public int getStart() {
@@ -91,7 +91,7 @@ public class TimeTableCourse {
         return "TimeTableCourse{" +
                 "id=" + id +
                 ", timeTable=" + timeTable +
-                ", course=" + course +
+                ", clazz=" + clazz +
                 ", start=" + start +
                 ", end=" + end +
                 ", dayOfWeek=" + dayOfWeek +

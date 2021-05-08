@@ -2,16 +2,84 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet id="1" author="Tuan">
         <insert tableName="course">
-            <column name="id" value="ENG"/>
-            <column name="name" value="English"/>
+            <column name="id" value="ACCT3603"/>
+            <column name="name" value="Hệ thống thông tin kế toán"/>
         </insert>
         <insert tableName="course">
-            <column name="id" value="MATH"/>
-            <column name="name" value="Math"/>
+            <column name="id" value="ACCT5123"/>
+            <column name="name" value="Hoạch định nguồn lực doanh nghiệp"/>
         </insert>
         <insert tableName="course">
-            <column name="id" value="ALO"/>
-            <column name="name" value="Algorithm"/>
+            <column name="id" value="ADENG1"/>
+            <column name="name" value="Tiếng Anh tăng cường 1"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="ADENG2"/>
+            <column name="name" value="Tiếng Anh tăng cường 2"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="ADENG3"/>
+            <column name="name" value="Tiếng Anh tăng cường 3"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="ADENG4"/>
+            <column name="name" value="Tiếng Anh tăng cường 4"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="BOQC1"/>
+            <column name="name" value="Nhập môn máy tính lượng tử"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CARC1"/>
+            <column name="name" value="Kiến trúc máy tính"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE005"/>
+            <column name="name" value="Giới thiệu ngành Kỹ Thuật Máy tính"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE101"/>
+            <column name="name" value="Lý thuyết mạch điện"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE102"/>
+            <column name="name" value="Hệ thống số"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE103"/>
+            <column name="name" value="Vi xử lý-vi điều khiển"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE104"/>
+            <column name="name" value="Các thiết bị và mạch điện tử"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE105"/>
+            <column name="name" value="Xử lý tín hiệu số"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE106"/>
+            <column name="name" value="Thiết kế vi mạch với HDL"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE107"/>
+            <column name="name" value="Hệ thống nhúng"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE108"/>
+            <column name="name" value="Hệ điều hành nâng cao"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE109"/>
+            <column name="name" value="Lập trình nhúng căn bản"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE110"/>
+            <column name="name" value="Lập trình hệ thống với Java"/>
+        </insert>
+        <insert tableName="course">
+            <column name="id" value="CE111"/>
+            <column name="name" value="Kiến trúc máy tính nâng cao"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

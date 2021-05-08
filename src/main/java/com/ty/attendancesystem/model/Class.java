@@ -1,7 +1,10 @@
 package com.ty.attendancesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "class")
@@ -15,8 +18,15 @@ public class Class {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "number_student")
+    private long numberStudent;
+
     @Column(name = "status")
     private int status;
+
+    @OneToMany(mappedBy = "clazz")
+    @JsonIgnore
+    private List<TimeTableCourse> timeTableCourses;
 
     @ManyToOne
     @JoinColumn(name = "teacher_user_id")
@@ -25,6 +35,14 @@ public class Class {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public List<TimeTableCourse> getTimeTableCourses() {
+        return timeTableCourses;
+    }
+
+    public void setTimeTableCourses(List<TimeTableCourse> timeTableCourses) {
+        this.timeTableCourses = timeTableCourses;
+    }
 
     public User getTeacher() {
         return teacher;
@@ -72,5 +90,13 @@ public class Class {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public long getNumberStudent() {
+        return numberStudent;
+    }
+
+    public void setNumberStudent(long numberStudent) {
+        this.numberStudent = numberStudent;
     }
 }

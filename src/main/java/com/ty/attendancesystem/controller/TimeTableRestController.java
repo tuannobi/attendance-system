@@ -32,7 +32,6 @@ public class TimeTableRestController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody TimeTable timeTable) {
-        System.out.println("=========================="+timeTable.toString());
         for(int i=0;i<timeTable.getTimeTableCourses().size();i++){
             timeTable.getTimeTableCourses().get(i).setTimeTable(timeTable);
         }
