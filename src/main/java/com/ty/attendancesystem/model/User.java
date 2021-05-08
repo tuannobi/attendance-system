@@ -27,6 +27,9 @@ public class User {
   @Column(name="phone")
   private String phone;
 
+  @Column(name = "address")
+  private String address;
+
   @Column(name = "full_name")
   private String fullName;
 
@@ -110,5 +113,13 @@ public class User {
 
   public void setBirthday(LocalDate birthday) {
     this.birthday = birthday;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 }

@@ -36,6 +36,7 @@
             <column name="password" value="$2y$12$OezJT.cakt0n71tUNXYtOOSuRWoYcqRkPeElTKKNmGsrBnEANY3N6"/>
             <column name="email" value="teacher@gmail.com"/>
             <column name="phone" value="0147852365"/>
+            <column name="address" value="Address demo"/>
             <column name="full_name" value="Hồ Trần Nhật Thủy"/>
             <column name="birthday" value="1985/12/06"/>
         </insert>
@@ -47,6 +48,7 @@
             <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
             <column name="email" value="tuantrananhit@gmail.com"/>
             <column name="phone" value="0214512541"/>
+            <column name="address" value="Address demo"/>
             <column name="full_name" value="Trần Anh Tuân"/>
             <column name="birthday" value="1999/12/12"/>
         </insert>
@@ -58,6 +60,7 @@
             <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
             <column name="email" value="huynhuuy@gmail.com"/>
             <column name="phone" value="0145478452"/>
+            <column name="address" value="Address demo"/>
             <column name="full_name" value="Huỳnh Hữu Ý"/>
             <column name="birthday" value="1999/06/12"/>
         </insert>
@@ -69,6 +72,7 @@
             <column name="password" value="$2y$12$cdRRe3B4EPbCUbQu159jRON2YFaxoz9DVHRyqVE1BGyAn.Kg3XAdS"/>
             <column name="email" value="parent@gmail.com"/>
             <column name="phone" value="0214587452"/>
+            <column name="address" value="Address demo"/>
             <column name="full_name" value="Lê Công Đạt"/>
             <column name="birthday" value="1978/06/12"/>
         </insert>

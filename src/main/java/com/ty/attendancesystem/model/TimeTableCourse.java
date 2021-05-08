@@ -1,8 +1,6 @@
 package com.ty.attendancesystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.runtime.AllocationStrategy;
 
 import javax.persistence.*;
 
