@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -77,6 +78,11 @@ public class UserServiceImpl extends BaseServiceImpl<User,String> implements Use
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     return super.save(user);
+  }
+
+  @Override
+  public List<User> getUsersByRole(int roleId) {
+    return userRepository.getUsersByRole(roleId);
   }
 
   @Transactional

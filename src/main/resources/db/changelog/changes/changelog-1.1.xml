@@ -25,6 +25,7 @@
             <column name="password" value="$2y$12$tXDQcrt3M8tqwRr0/l2ZX.llS4Zgy8A4OfxBXDJ2dLvMpqc9yM4qq"/>
             <column name="email" value="admin@gmail.com"/>
             <column name="phone" value="0123456789"/>
+            <column name="address" value="Address demo"/>
             <column name="full_name" value="Admin"/>
             <column name="birthday" value="1989/01/12"/>
         </insert>

@@ -1,6 +1,7 @@
 package com.ty.attendancesystem.controller;
 
 import com.ty.attendancesystem.constant.ResponseMessage;
+import com.ty.attendancesystem.constant.RoleNumber;
 import com.ty.attendancesystem.exception.ValidateException;
 import com.ty.attendancesystem.message.SuccessResponse;
 import com.ty.attendancesystem.model.User;
@@ -29,6 +30,26 @@ public class UserRestController {
     @GetMapping
     public List<User> getAll(){
         return userService.findAll();
+    }
+
+    @GetMapping("/students")
+    public List<User> getStudents(){
+        return userService.getUsersByRole(RoleNumber.ROLE_STUDENT);
+    }
+
+    @GetMapping("/teachers")
+    public List<User> getTeachers(){
+        return userService.getUsersByRole(RoleNumber.ROLE_TEACHER);
+    }
+
+    @GetMapping("/admins")
+    public List<User> getAdmins(){
+        return userService.getUsersByRole(RoleNumber.ROLE_ADMIN);
+    }
+
+    @GetMapping("/parents")
+    public List<User> getParents(){
+        return userService.getUsersByRole(RoleNumber.ROLE_PARENT);
     }
 
     @GetMapping("/{id}")

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, String>{
@@ -21,4 +22,8 @@ public interface UserRepository extends JpaRepository<User, String>{
           " birthday = :birthday" +
           " where id = :id")
   int updateInformationUser(String id, LocalDate birthday, String fullName, String phone, String email);
+
+  @Query(value = "select u.* from users u inner join users_role ur on u.id = ur.users_id " +
+          "where ur.role_id= :roleId", nativeQuery = true)
+  List<User> getUsersByRole(int roleId);
 }

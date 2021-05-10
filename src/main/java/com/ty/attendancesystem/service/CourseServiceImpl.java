@@ -2,16 +2,17 @@ package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.exception.ServiceException;
+import com.ty.attendancesystem.helper.ExcelHelper;
 import com.ty.attendancesystem.model.Course;
-import com.ty.attendancesystem.model.Role;
 import com.ty.attendancesystem.repository.CourseRepository;
-import com.ty.attendancesystem.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<Course,String> implements CourseService {
@@ -46,5 +47,11 @@ public class CourseServiceImpl extends BaseServiceImpl<Course,String> implements
       throw new ServiceException("Course is not existed");
     }
     return courseRepository.save(course);
+  }
+
+  @Override
+  public void save(MultipartFile multipartFile) throws IOException {
+    List<Course> courses = ExcelHelper.excelToCourses(multipartFile.getInputStream());
+    courseRepository.saveAll(courses);
   }
 }
