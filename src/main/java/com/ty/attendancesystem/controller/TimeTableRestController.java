@@ -24,7 +24,7 @@ public class TimeTableRestController {
     }
 
     @GetMapping("/student/{studentId}/{year}/{semester}")
-    public TimeTable getTimeTableByStudentId(@PathVariable("studentId") String studentId,
+    public List<TimeTable> getTimeTableByStudentId(@PathVariable("studentId") String studentId,
                                                          @PathVariable("year") int year,
                                                          @PathVariable("semester") int semester){
         return timeTableService.getTimeTable(studentId, year, semester);

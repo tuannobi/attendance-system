@@ -5,6 +5,7 @@ import com.ty.attendancesystem.helper.ExcelHelper;
 import com.ty.attendancesystem.message.SuccessResponse;
 import com.ty.attendancesystem.service.ClassService;
 import com.ty.attendancesystem.service.CourseService;
+import com.ty.attendancesystem.service.TimeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class ExcelRestController {
     @Autowired
     private ClassService classService;
 
+    @Autowired
+    private TimeTableService timeTableService;
+
     @PostMapping("/courses")
     public ResponseEntity<?> importCourses(@RequestParam("file")MultipartFile multipartFile) throws IOException {
         if(ExcelHelper.hasExcelFormat(multipartFile)){
@@ -40,6 +44,16 @@ public class ExcelRestController {
     public ResponseEntity<?> importClasses(@RequestParam("file")MultipartFile multipartFile) throws IOException {
         if(ExcelHelper.hasExcelFormat(multipartFile)){
             classService.save(multipartFile);
+        }
+        return new ResponseEntity<>(new SuccessResponse("",
+                HttpStatus.OK.value(),
+                ResponseMessage.ADD_SUCCESS), HttpStatus.OK);
+    }
+
+    @PostMapping("/timetables")
+    public ResponseEntity<?> importTimeTable(@RequestParam("file")MultipartFile multipartFile) throws IOException {
+        if(ExcelHelper.hasExcelFormat(multipartFile)){
+            timeTableService.save(multipartFile);
         }
         return new ResponseEntity<>(new SuccessResponse("",
                 HttpStatus.OK.value(),

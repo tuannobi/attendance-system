@@ -28,6 +28,9 @@ public class TimeTable {
     @Column(name = "status")
     private int status;
 
+    @Column(name="day_of_week")
+    private int dayOfWeek;
+
     @OneToMany(mappedBy = "timeTable",cascade = CascadeType.ALL)
     private List<TimeTableCourse> timeTableCourses;
 
@@ -79,6 +82,14 @@ public class TimeTable {
         this.status = status;
     }
 
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
     @Override
     public String toString() {
         return "TimeTable{" +
@@ -87,6 +98,7 @@ public class TimeTable {
                 ", year=" + year +
                 ", semester=" + semester +
                 ", status=" + status +
+                ", dayOfWeek=" + dayOfWeek +
                 ", timeTableCourses=" + timeTableCourses +
                 '}';
     }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TimeTableCourseRepository extends JpaRepository<TimeTableCourse, Long> {
 //    TimeTableCourse getTimeTableCourseByTimeTable_UserIdAndTimeTable_Status(String id,int status);
-    List<TimeTableCourse> getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(String id, int year, int semester);
+//    List<TimeTableCourse> getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(String id, int year, int semester);
 }

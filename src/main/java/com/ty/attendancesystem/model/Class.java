@@ -36,6 +36,13 @@ public class Class {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    public Class() {
+    }
+
+    public Class(String id) {
+        this.id = id;
+    }
+
     public List<TimeTableCourse> getTimeTableCourses() {
         return timeTableCourses;
     }

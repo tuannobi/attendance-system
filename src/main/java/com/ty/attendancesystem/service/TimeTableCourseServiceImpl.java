@@ -26,10 +26,10 @@ public class TimeTableCourseServiceImpl extends BaseServiceImpl<TimeTableCourse,
         return this.timeTableCourseRepository;
     }
 
-    @Override
-    public List<TimeTableCourse> getTimeTable(String studentId, int year, int semester) {
-        return timeTableCourseRepository.getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(studentId, year, semester);
-    }
+//    @Override
+//    public List<TimeTableCourse> getTimeTable(String studentId, int year, int semester) {
+//        return timeTableCourseRepository.getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(studentId, year, semester);
+//    }
 
     @Transactional
     @Override

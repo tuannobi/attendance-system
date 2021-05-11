@@ -101,6 +101,7 @@
             <column name="year" type="INTEGER"/>
             <column name="semester" type="INTEGER"/>
             <column name="status" type="SMALLINT"/>
+            <column name="day_of_week" type="INTEGER"/>
         </createTable>
     </changeSet>
     <changeSet author="tuan (generated)" id="1620489393155-9">
@@ -116,7 +117,6 @@
             </column>
             <column name="lesson_start" type="INTEGER"/>
             <column name="lesson_end" type="INTEGER"/>
-            <column name="day_of_week" type="INTEGER"/>
         </createTable>
     </changeSet>
     <changeSet author="tuan (generated)" id="1620489393155-10">

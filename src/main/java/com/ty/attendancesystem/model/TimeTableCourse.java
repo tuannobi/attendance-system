@@ -30,9 +30,6 @@ public class TimeTableCourse {
     @Column(name = "lesson_end")
     private int end;
 
-    @Column(name = "day_of_week")
-    private int dayOfWeek;
-
     public TimeTableCourse() {
     }
 
@@ -76,14 +73,6 @@ public class TimeTableCourse {
         this.end = end;
     }
 
-    public int getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public void setDayOfWeek(int dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
     @Override
     public String toString() {
         return "TimeTableCourse{" +
@@ -92,7 +81,6 @@ public class TimeTableCourse {
                 ", clazz=" + clazz +
                 ", start=" + start +
                 ", end=" + end +
-                ", dayOfWeek=" + dayOfWeek +
                 '}';
     }
 }
