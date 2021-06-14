@@ -25,6 +25,7 @@ public class PhotoRestController {
   public Object listPhotos(){
     return photoService.findAll();
   }
+
   @SuppressWarnings("rawtypes")
   @PostMapping
   @PreAuthorize("hasRole('ADMIN')")

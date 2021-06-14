@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,6 +42,17 @@ public class User {
       joinColumns = @JoinColumn(name = "users_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles;
+
+  @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+  private List<Photo> photos;
+
+  public List<Photo> getPhotos() {
+    return photos;
+  }
+
+  public void setPhotos(List<Photo> photos) {
+    this.photos = photos;
+  }
 
   public Set<Role> getRoles() {
     return roles;

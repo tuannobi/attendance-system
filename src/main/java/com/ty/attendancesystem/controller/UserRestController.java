@@ -1,18 +1,26 @@
 package com.ty.attendancesystem.controller;
 
+import com.cloudinary.Singleton;
+import com.cloudinary.utils.ObjectUtils;
 import com.ty.attendancesystem.constant.ResponseMessage;
 import com.ty.attendancesystem.constant.RoleNumber;
 import com.ty.attendancesystem.exception.ValidateException;
 import com.ty.attendancesystem.message.SuccessResponse;
+import com.ty.attendancesystem.model.Photo;
 import com.ty.attendancesystem.model.User;
+import com.ty.attendancesystem.service.PhotoService;
 import com.ty.attendancesystem.service.UserService;
+import com.ty.attendancesystem.util.PhotoUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,9 +30,12 @@ public class UserRestController {
 
     public final UserService userService;
 
+    private PhotoService photoService;
+
     @Autowired
-    public UserRestController(UserService userService){
+    public UserRestController(UserService userService, PhotoService photoService){
         this.userService = userService;
+        this.photoService = photoService;
     }
 
     @GetMapping
@@ -35,6 +46,11 @@ public class UserRestController {
     @GetMapping("/students")
     public List<User> getStudents(){
         return userService.getUsersByRole(RoleNumber.ROLE_STUDENT);
+    }
+
+    @PostMapping("/students/photos")
+    public List<Photo> addPhotosToStudent(@RequestParam(name = "id") String studentId, List<MultipartFile> files) throws IOException {
+        return photoService.insert(files, studentId);
     }
 
     @GetMapping("/teachers")
