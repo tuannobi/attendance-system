@@ -53,6 +53,11 @@ public class UserRestController {
         return photoService.insert(files, studentId);
     }
 
+    @GetMapping("/students/photos")
+    public List<Photo> getPhotosByStudent(@RequestParam(name = "id") String studentId) {
+        return photoService.getPhotosByStudent(studentId);
+    }
+
     @GetMapping("/teachers")
     public List<User> getTeachers(){
         return userService.getUsersByRole(RoleNumber.ROLE_TEACHER);

@@ -42,6 +42,11 @@ public class PhotoServiceImpl extends BaseServiceImpl<Photo, Long> implements Ph
   }
 
   @Transactional
+  public List<Photo> getPhotosByStudent(String studentId) {
+      return photoRepository.getPhotosByStudentId(studentId);
+  }
+
+  @Transactional
   public List<Photo> insert(List<MultipartFile> files, String studentId) throws IOException {
     Optional<User> existedUser = userRepository.findById(studentId);
     List<PhotoUpload> photoUploads = mapping(files);
