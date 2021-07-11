@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface PhotoService extends BaseService<Photo, Long> {
-    List<Photo> insert(List<MultipartFile> files, String studentId) throws IOException;
+    List<Photo> insert(List<MultipartFile> files, String studentId, String rootPath) throws IOException;
+    List<Photo> insertAttendanceDetail(List<MultipartFile> files, String studentId, String rootPath) throws IOException;
     List<Photo> getPhotosByStudent(String studentId);
 }

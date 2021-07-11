@@ -14,6 +14,7 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
             "and student_user_id= :studentId and " +
             "time\\:\\:date=current_date",nativeQuery = true)
     int checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId);
+
     List<AttendanceDetail> getAttendanceDetailsByStudent_IdOrderByTimeAsc(String studentId);
 
     @Modifying

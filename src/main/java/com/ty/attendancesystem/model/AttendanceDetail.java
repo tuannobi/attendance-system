@@ -18,6 +18,9 @@ public class AttendanceDetail {
     @Column(name = "status")
     private int status;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_user_id")
     private User student;
@@ -64,5 +67,13 @@ public class AttendanceDetail {
 
     public void setClazz(Class clazz) {
         this.clazz = clazz;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

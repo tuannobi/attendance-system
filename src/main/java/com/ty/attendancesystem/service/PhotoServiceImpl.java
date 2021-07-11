@@ -61,6 +61,34 @@ public class PhotoServiceImpl extends BaseServiceImpl<Photo, Long> implements Ph
     return photos;
    }
 
+    @Transactional
+    public List<Photo> insert(List<MultipartFile> files, String studentId, String rootPath) throws IOException {
+        Optional<User> existedUser = userRepository.findById(studentId);
+        List<PhotoUpload> photoUploads = mapping(files);
+        List<Photo> photos = new ArrayList<>();
+        for (PhotoUpload photoUpload: photoUploads) {
+            Photo photo = upload(photoUpload, rootPath + "/"+studentId);
+            photo.setStudent(existedUser.get());
+            photos.add(photo);
+        }
+        existedUser.get().setPhotos(photos);
+        userRepository.save(existedUser.get());
+        return photos;
+    }
+
+    @Transactional
+    public List<Photo> insertAttendanceDetail(List<MultipartFile> files, String studentId, String rootPath) throws IOException {
+        Optional<User> existedUser = userRepository.findById(studentId);
+        List<PhotoUpload> photoUploads = mapping(files);
+        List<Photo> photos = new ArrayList<>();
+        for (PhotoUpload photoUpload: photoUploads) {
+            Photo photo = upload(photoUpload, rootPath + "/"+studentId);
+            photo.setStudent(existedUser.get());
+            photos.add(photo);
+        }
+        return photos;
+    }
+
    private List<PhotoUpload> mapping(List<MultipartFile> files) {
     List<PhotoUpload> photoUploads = new ArrayList<>();
     for (MultipartFile multipartFile: files) {

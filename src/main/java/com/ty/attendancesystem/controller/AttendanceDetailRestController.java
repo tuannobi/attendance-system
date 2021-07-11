@@ -8,8 +8,10 @@ import com.ty.attendancesystem.message.SuccessResponse;
 import com.ty.attendancesystem.message.mail.MailRequest;
 import com.ty.attendancesystem.message.sms.SmsRequest;
 import com.ty.attendancesystem.model.AttendanceDetail;
+import com.ty.attendancesystem.model.Photo;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.service.AttendanceDetailService;
+import com.ty.attendancesystem.service.PhotoService;
 import com.ty.attendancesystem.service.UserService;
 import com.ty.attendancesystem.service.mail.MailSenderService;
 import com.ty.attendancesystem.service.sms.SmsSenderService;
@@ -17,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -34,13 +38,17 @@ public class AttendanceDetailRestController {
 
     private final UserService userService;
 
+    private final PhotoService photoService;
+
     @Autowired
     public AttendanceDetailRestController(AttendanceDetailService attendanceDetailService,
-                                          MailSenderService mailSenderService, SmsSenderService smsSenderService, UserService userService){
+                                          MailSenderService mailSenderService, SmsSenderService smsSenderService, UserService userService,
+                                          PhotoService photoService){
         this.attendanceDetailService = attendanceDetailService;
         this.mailSenderService = mailSenderService;
         this.smsSenderService = smsSenderService;
         this.userService = userService;
+        this.photoService = photoService;
     }
 
     @GetMapping("/student/{studentId}")
@@ -56,6 +64,16 @@ public class AttendanceDetailRestController {
     @GetMapping
     public List<AttendanceDetail> getAll(){
         return attendanceDetailService.findAll();
+    }
+
+    @GetMapping("/check")
+    public boolean check(@RequestBody AttendanceDetail attendanceDetail) {
+        boolean flag =  attendanceDetailService.checkIfStudentIsTakeAttendanceOrNot(attendanceDetail.getStudent().getId(),
+                attendanceDetail.getClazz().getId());
+        if (!flag) {
+            System.out.println("Student user took attendance in this class before");
+        }
+        return flag;
     }
 
     @PostMapping
@@ -100,6 +118,11 @@ public class AttendanceDetailRestController {
         return new ResponseEntity<>(new FailResponse(LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 ResponseMessage.ADD_FAIL),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PostMapping("/photo")
+    public List<Photo> addPhotoToAttendanceDetail(@RequestParam(name = "id") String studentId, List<MultipartFile> files) throws IOException {
+        return photoService.insertAttendanceDetail(files, studentId, "history/students");
     }
 
     @PutMapping

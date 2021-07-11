@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,11 @@ public class StudentClassServiceImpl extends BaseServiceImpl<StudentClass,String
   @Override
   protected JpaRepository<StudentClass, String> getRepository() {
     return this.studentClassRepository;
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public List<StudentClass> getStudentClassByClassId(String classId) {
+    return studentClassRepository.getStudentClassByClassId(classId);
   }
 }
