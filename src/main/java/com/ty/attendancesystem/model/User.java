@@ -37,6 +37,9 @@ public class User {
   @Column(name = "birthday")
   private LocalDate birthday;
 
+  @Column(name = "parent_id")
+  private String parentId;
+
   @ManyToMany
   @JoinTable(name = "users_role",
       joinColumns = @JoinColumn(name = "users_id"),
@@ -137,5 +140,13 @@ public class User {
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  public String getParentId() {
+    return parentId;
+  }
+
+  public void setParentId(String parentId) {
+    this.parentId = parentId;
   }
 }

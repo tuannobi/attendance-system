@@ -28,6 +28,7 @@ public class SmsSenderServiceImpl implements SmsSenderService{
       PhoneNumber to = new PhoneNumber(smsRequest.getPhoneNumber());
       PhoneNumber from = new PhoneNumber(twilioConfig.getTrialNumber());
       String message = smsRequest.getMessage();
+      System.out.println("Message "+ message);
       MessageCreator creator = Message.creator(to, from, message);
       creator.create();
       LOGGER.info("Send sms {}" + smsRequest);

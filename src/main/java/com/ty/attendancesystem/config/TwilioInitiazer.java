@@ -19,7 +19,7 @@ public class TwilioInitiazer {
     Twilio.init(twilioConfig.getAccountSid(),
         twilioConfig.getAuthToken()
     );
-    LOGGER.info("Twilio initialized ... with account sid {} ", twilioConfig.getAccountSid());
+    LOGGER.info("TwilioDemo initialized ... with account sid {} ", twilioConfig.getAccountSid());
   }
 
 
