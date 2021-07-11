@@ -31,15 +31,15 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
   @Transactional
   @Override
   public AttendanceDetail insert(AttendanceDetail attendanceDetail) {
-    if (!checkIfStudentIsTakeAttendanceOrNot(attendanceDetail.getStudent().getId(),attendanceDetail.getClazz().getId())){
+//    if (!checkIfStudentIsTakeAttendanceOrNot(attendanceDetail.getStudent().getId(),attendanceDetail.getClazz().getId())){
       attendanceDetail.setTime(LocalDateTime.now());
       attendanceDetail.setStatus(AttendanceStatus.ATTENDED);
       AttendanceDetail result = attendanceDetailRepository.save(attendanceDetail);
       attendanceDetailRepository.refresh(result);
       return result;
-    } else {
-      throw new ServiceException("Student user took attendance in this class before");
-    }
+//    } else {
+//      throw new ServiceException("Student user took attendance in this class before");
+//    }
   }
 
   @Override
@@ -52,7 +52,9 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     return attendanceDetailRepository.updateAttendanceDetails(attendanceDetail.getId(), attendanceDetail.getStatus());
   }
 
-  private boolean checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId) {
+  @Transactional(readOnly = true)
+  @Override
+  public boolean checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId) {
     int resultCount = attendanceDetailRepository.checkIfStudentIsTakeAttendanceOrNot(studentId, classId);
     if (resultCount>0){
       return true;

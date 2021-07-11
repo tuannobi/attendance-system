@@ -50,7 +50,7 @@ public class UserRestController {
 
     @PostMapping("/students/photos")
     public List<Photo> addPhotosToStudent(@RequestParam(name = "id") String studentId, List<MultipartFile> files) throws IOException {
-        return photoService.insert(files, studentId);
+        return photoService.insert(files, studentId, "students");
     }
 
     @GetMapping("/students/photos")
