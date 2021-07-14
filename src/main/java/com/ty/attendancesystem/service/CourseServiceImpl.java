@@ -2,7 +2,7 @@ package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.exception.ServiceException;
-import com.ty.attendancesystem.helper.ExcelHelper;
+import com.ty.attendancesystem.helper.ExcelImportHelper;
 import com.ty.attendancesystem.model.Course;
 import com.ty.attendancesystem.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course,String> implements
 
   @Override
   public void save(MultipartFile multipartFile) throws IOException {
-    List<Course> courses = ExcelHelper.excelToCourses(multipartFile.getInputStream());
+    List<Course> courses = ExcelImportHelper.excelToCourses(multipartFile.getInputStream());
     courseRepository.saveAll(courses);
   }
 }

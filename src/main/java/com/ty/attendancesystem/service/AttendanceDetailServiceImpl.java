@@ -62,4 +62,21 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     return false;
   }
 
+  @Override
+  public List<AttendanceDetail> getAttendanceDetailsByClazz_Id(String classId) {
+    return attendanceDetailRepository.getAttendanceDetailsByClazz_Id(classId);
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public int countStatusIsPresentByStudentByClass(String classId, String studentId) {
+    return attendanceDetailRepository.countStatusIsPresentByStudentByClass(classId, studentId);
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public int countStatusIsAbsentByStudentByClass(String classId, String studentId) {
+    return attendanceDetailRepository.countStatusIsAbsentByStudentByClass(classId, studentId);
+  }
+
 }

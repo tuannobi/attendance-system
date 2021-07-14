@@ -11,4 +11,7 @@ public interface AttendanceDetailService extends BaseService<AttendanceDetail, L
     List<AttendanceDetail> getAttendanceDetailsStudent(String studentId);
     AttendanceDetail updateAttendanceDetails(AttendanceDetail attendanceDetail);
     boolean checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId);
+    List<AttendanceDetail> getAttendanceDetailsByClazz_Id(String classId);
+    int countStatusIsPresentByStudentByClass(String classId, String studentId);
+    int countStatusIsAbsentByStudentByClass(String classId, String studentId);
 }

@@ -16,10 +16,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExcelHelper {
+public class ExcelImportHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] COURSE_HEADERs = { "Id", "Name"};
-    static String[] SHEET = {"Course","Class","TimeTable"};
+    static String[] SHEET = {"Course","Class","TimeTable","StudentClass"};
 
     public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -217,6 +217,58 @@ public class ExcelHelper {
             workbook.close();
 
             return timeTables;
+        } catch (IOException e) {
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        }
+    }
+
+    public static List<StudentClass> excelToStudentClass(InputStream is) {
+        try {
+            Workbook workbook = new XSSFWorkbook(is);
+
+            Sheet sheet = workbook.getSheet(SHEET[3]);
+            Iterator<Row> rows = sheet.iterator();
+
+            List<StudentClass> classes = new ArrayList<StudentClass>();
+
+            int rowNumber = 0;
+            while (rows.hasNext()) {
+                Row currentRow = rows.next();
+
+                // skip header
+                if (rowNumber == 0) {
+                    rowNumber++;
+                    continue;
+                }
+
+                Iterator<Cell> cellsInRow = currentRow.iterator();
+
+                StudentClass studentClass = new StudentClass();
+
+                int cellIdx = 0;
+                while (cellsInRow.hasNext()) {
+                    Cell currentCell = cellsInRow.next();
+
+                    switch (cellIdx) {
+                        case 0:
+                            studentClass.setClassId(currentCell.getStringCellValue());
+                            break;
+                        case 1:
+                            studentClass.setStudentUserId(currentCell.getStringCellValue());
+                            break;
+                        default:
+                            break;
+                    }
+
+                    cellIdx++;
+                }
+
+                classes.add(studentClass);
+            }
+
+            workbook.close();
+
+            return classes;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
         }
