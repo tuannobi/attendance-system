@@ -31,9 +31,12 @@ public class TimeTableCourseRestController {
 
     @DeleteMapping
     public void delete(@RequestBody TimeTableCourse timeTableCourse) {
+        System.out.println("ENTER===============================");
         String studentId =timeTableCourseService.getStudentIdFromTableCourse(timeTableCourse.getId());
         System.out.println("================Student Id =================" + studentId);
-        studentClassRepository.deleteStudentFromClassById(studentId,timeTableCourse.getClazz().getId());
+        System.out.println("================Class Id ===================" + timeTableCourse.getClazz().getId());
+        int temp = studentClassRepository.deleteStudentFromClassById(studentId,timeTableCourse.getClazz().getId());
+        System.out.println("So dong da xoa =================== "+temp);
         timeTableCourseService.deleteById(timeTableCourse.getId());
     }
 }
