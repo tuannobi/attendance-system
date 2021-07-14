@@ -3,8 +3,10 @@ package com.ty.attendancesystem.service;
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.constant.TimeTableCourseStatus;
 import com.ty.attendancesystem.helper.ExcelHelper;
+import com.ty.attendancesystem.model.StudentClass;
 import com.ty.attendancesystem.model.TimeTable;
 import com.ty.attendancesystem.model.TimeTableCourse;
+import com.ty.attendancesystem.repository.StudentClassRepository;
 import com.ty.attendancesystem.repository.TimeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,10 +21,12 @@ import java.util.List;
 public class TimeTableServiceImpl extends BaseServiceImpl<TimeTable,Long> implements TimeTableService {
 
     private TimeTableRepository timeTableRepository;
+    private StudentClassRepository studentClassRepository;
 
     @Autowired
-    public TimeTableServiceImpl(TimeTableRepository timeTableRepository) {
+    public TimeTableServiceImpl(TimeTableRepository timeTableRepository, StudentClassRepository studentClassRepository) {
         this.timeTableRepository = timeTableRepository;
+        this.studentClassRepository = studentClassRepository;
     }
 
     @Override
@@ -49,6 +53,10 @@ public class TimeTableServiceImpl extends BaseServiceImpl<TimeTable,Long> implem
         for (TimeTable timeTable: timeTables) {
             for(int i=0;i<timeTable.getTimeTableCourses().size();i++){
                 timeTable.getTimeTableCourses().get(i).setTimeTable(timeTable);
+                StudentClass studentClass = new StudentClass();
+                studentClass.setStudentUserId(timeTable.getUserId());
+                studentClass.setClassId(timeTable.getTimeTableCourses().get(i).getClazz().getId());
+                studentClassRepository.save(studentClass);
             }
         }
         timeTableRepository.saveAll(timeTables);
