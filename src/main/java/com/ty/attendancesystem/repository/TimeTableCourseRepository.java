@@ -9,7 +9,7 @@ import java.util.List;
 public interface TimeTableCourseRepository extends JpaRepository<TimeTableCourse, Long> {
 //    TimeTableCourse getTimeTableCourseByTimeTable_UserIdAndTimeTable_Status(String id,int status);
 //    List<TimeTableCourse> getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(String id, int year, int semester);
-    @Query(value = "select users.id from users join time_table on users.id = time_table.id" +
+    @Query(value = "select users.id from users join time_table on users.id = time_table.user_id" +
             " join time_table_course on time_table.id = time_table_course.time_table_id " +
             "where time_table_course.id = ?1", nativeQuery = true)
     String getStudentIdFromTableCourse(Long timeTableCourseId);
