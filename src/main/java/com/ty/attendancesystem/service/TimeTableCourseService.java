@@ -11,4 +11,5 @@ public interface TimeTableCourseService extends BaseService<TimeTableCourse, Lon
     TimeTableCourse insert(TimeTableCourse timeTableCourse);
 
     TimeTableCourse update(TimeTableCourse timeTableCourse);
+    String getStudentIdFromTableCourse(Long timeTableCourse);
 }
