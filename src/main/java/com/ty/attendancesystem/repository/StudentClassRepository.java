@@ -10,6 +10,6 @@ public interface StudentClassRepository extends JpaRepository<StudentClass, Stri
 
     List<StudentClass> getStudentClassByClassId(String classId);
 
-    @Query(value = "delete from student_class where student_user_id = ?1 and class_id = ?2", nativeQuery = true)
+    @Query(value = "delete from student_class where student_user_id = :studentId and class_id = :classId", nativeQuery = true)
     int deleteStudentFromClassById(String studentId, String classId);
 }

@@ -31,8 +31,8 @@ public class TimeTableCourseRestController {
 
     @DeleteMapping
     public void delete(@RequestBody TimeTableCourse timeTableCourse) {
-        String studentId =timeTableCourseService.getStudentIdFromTableCourse(timeTableCourse.getId());
-        studentClassRepository.deleteStudentFromClassById(studentId,timeTableCourse.getClazz().getId());
+//        String studentId =timeTableCourseService.getStudentIdFromTableCourse(timeTableCourse.getId());
+//        studentClassRepository.deleteStudentFromClassById(studentId,timeTableCourse.getClazz().getId());
         timeTableCourseService.delete(timeTableCourse);
     }
 }

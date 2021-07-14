@@ -11,6 +11,6 @@ public interface TimeTableCourseRepository extends JpaRepository<TimeTableCourse
 //    List<TimeTableCourse> getTimeTableCourseByTimeTable_UserIdAndTimeTable_YearAndTimeTable_SemesterOrderByDayOfWeekAsc(String id, int year, int semester);
     @Query(value = "select users.id from users join time_table on users.id = time_table.users_id" +
             " join time_table_course on time_table.id = time_table_course.time_table_id " +
-            "where time_table_course.id = ?1", nativeQuery = true)
+            "where time_table_course.id = :timeTableCourseId", nativeQuery = true)
     String getStudentIdFromTableCourse(Long timeTableCourseId);
 }
