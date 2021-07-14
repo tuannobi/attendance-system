@@ -38,6 +38,17 @@ public class StudentClassRestController {
         return users;
     }
 
+    @GetMapping("/students/list/{classId}")
+    public List<String> getStudentsByClassIdList(@PathVariable(name = "classId") String classId) {
+        List<StudentClass> studentClasses = studentClassService.getStudentClassByClassId(classId);
+        List<String> userIds = new ArrayList<>();
+        for (StudentClass studentClass: studentClasses) {
+            Optional<User> user = userService.findById(studentClass.getStudentUserId());
+            userIds.add(user.get().getId());
+        }
+        return userIds;
+    }
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody StudentClass studentClass){
         StudentClass savedStudentClass = studentClassService.save(studentClass);

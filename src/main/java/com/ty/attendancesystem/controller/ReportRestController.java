@@ -53,6 +53,7 @@ public class ReportRestController {
             student.setAbsent(present);
             totalPresent += present;
             totalAbsent += absent;
+            students.add(student);
         }
         StatusObject statusObject = new StatusObject();
         statusObject.setStudents(students);
