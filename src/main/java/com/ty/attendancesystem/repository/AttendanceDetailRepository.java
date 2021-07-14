@@ -24,4 +24,10 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
     AttendanceDetail updateAttendanceDetails(Long id, int status);
 
     List<AttendanceDetail> getAttendanceDetailsByClazz_Id(String classId);
+
+    @Query(value = "select count (*) from attendance_deatail join users on attendance_detail.student_user_id = users.id join time_table on users.id = time_table.users_id where attendance_detail.status = 1 and class_id = :classId and attendance_detail.student_user_id = :studentId and time_table.year = :year and time_table.semester = :semester",nativeQuery = true)
+    int countStatusIsPresentByStudentByClass(String classId, int semester, int year, String studentId);
+
+    @Query(value = "select count (*) from attendance_detail join users on attendance_detail.student_user_id = users.id join time_table on users.id = time_table.users_id where attendance_detail.status = 0 and class_id = :classId and attendance_detail.student_user_id = :studentId and time_table.year = :year and time_table.semester = :semester", nativeQuery = true)
+    int countStatusIsAbsentByStudentByClass(String classId, int semester, int year, String studentId);
 }

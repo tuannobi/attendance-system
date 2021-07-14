@@ -67,4 +67,14 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     return attendanceDetailRepository.getAttendanceDetailsByClazz_Id(classId);
   }
 
+  @Override
+  public int countStatusIsPresentByStudentByClass(String classId, int semester, int year, String studentId) {
+    return attendanceDetailRepository.countStatusIsPresentByStudentByClass(classId,semester,year,studentId);
+  }
+
+  @Override
+  public int countStatusIsAbsentByStudentByClass(String classId, int semester, int year, String studentId) {
+    return attendanceDetailRepository.countStatusIsAbsentByStudentByClass(classId,semester,year,studentId);
+  }
+
 }
