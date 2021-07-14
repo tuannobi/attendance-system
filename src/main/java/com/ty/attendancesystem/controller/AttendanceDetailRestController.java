@@ -56,6 +56,11 @@ public class AttendanceDetailRestController {
         return attendanceDetailService.getAttendanceDetailsStudent(studentId);
     }
 
+    @GetMapping("/student/class/{classId}")
+    public List<AttendanceDetail> getByClassId(@PathVariable("classId") String classId) {
+        return attendanceDetailService.getAttendanceDetailsByClazz_Id(classId);
+    }
+
     @GetMapping("/{id}")
     public Optional<AttendanceDetail> get(@PathVariable("id") Long id) {
         return attendanceDetailService.findById(id);

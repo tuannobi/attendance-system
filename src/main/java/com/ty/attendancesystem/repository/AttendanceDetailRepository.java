@@ -22,4 +22,6 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
             "set status= :status " +
             "where id= :id ", nativeQuery = true)
     AttendanceDetail updateAttendanceDetails(Long id, int status);
+
+    List<AttendanceDetail> getAttendanceDetailsByClazz_Id(String classId);
 }

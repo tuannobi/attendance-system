@@ -62,4 +62,9 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     return false;
   }
 
+  @Override
+  public List<AttendanceDetail> getAttendanceDetailsByClazz_Id(String classId) {
+    return attendanceDetailRepository.getAttendanceDetailsByClazz_Id(classId);
+  }
+
 }
