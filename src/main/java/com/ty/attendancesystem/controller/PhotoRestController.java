@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +25,12 @@ public class PhotoRestController {
   @PreAuthorize("hasRole('ADMIN')")
   public Object listPhotos(){
     return photoService.findAll();
+  }
+
+  @GetMapping("/{id}")
+  @PreAuthorize("hasRole('ADMIN')")
+  public List<Photo> get(@PathVariable("id") String id) {
+    return photoService.getPhotosByStudent(id);
   }
 
   @SuppressWarnings("rawtypes")
