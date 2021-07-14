@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExcelHelper {
+public class ExcelImportHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] COURSE_HEADERs = { "Id", "Name"};
     static String[] SHEET = {"Course","Class","TimeTable","StudentClass"};

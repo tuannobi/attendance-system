@@ -1,12 +1,8 @@
 package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
-import com.ty.attendancesystem.helper.ExcelHelper;
-import com.ty.attendancesystem.model.Class;
-import com.ty.attendancesystem.model.Role;
+import com.ty.attendancesystem.helper.ExcelImportHelper;
 import com.ty.attendancesystem.model.StudentClass;
-import com.ty.attendancesystem.model.TimeTable;
-import com.ty.attendancesystem.repository.RoleRepository;
 import com.ty.attendancesystem.repository.StudentClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentClassServiceImpl extends BaseServiceImpl<StudentClass,String> implements StudentClassService {
@@ -41,7 +36,7 @@ public class StudentClassServiceImpl extends BaseServiceImpl<StudentClass,String
   @Transactional
   @Override
   public void importStudents(MultipartFile multipartFile) throws IOException {
-    List<StudentClass> studentClasses = ExcelHelper.excelToStudentClass(multipartFile.getInputStream());
+    List<StudentClass> studentClasses = ExcelImportHelper.excelToStudentClass(multipartFile.getInputStream());
     studentClassRepository.saveAll(studentClasses);
   }
 }

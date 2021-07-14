@@ -4,7 +4,7 @@ import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.constant.ClassStatus;
 import com.ty.attendancesystem.constant.RoleName;
 import com.ty.attendancesystem.exception.ServiceException;
-import com.ty.attendancesystem.helper.ExcelHelper;
+import com.ty.attendancesystem.helper.ExcelImportHelper;
 import com.ty.attendancesystem.model.Class;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.repository.ClassRepository;
@@ -79,7 +79,7 @@ public class ClassServiceImpl extends BaseServiceImpl<Class,String> implements C
 
   @Override
   public void save(MultipartFile multipartFile) throws IOException {
-    List<Class> classes = ExcelHelper.excelToClasses(multipartFile.getInputStream());
+    List<Class> classes = ExcelImportHelper.excelToClasses(multipartFile.getInputStream());
     classRepository.saveAll(classes);
   }
 

@@ -2,10 +2,9 @@ package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.constant.TimeTableCourseStatus;
-import com.ty.attendancesystem.helper.ExcelHelper;
+import com.ty.attendancesystem.helper.ExcelImportHelper;
 import com.ty.attendancesystem.model.StudentClass;
 import com.ty.attendancesystem.model.TimeTable;
-import com.ty.attendancesystem.model.TimeTableCourse;
 import com.ty.attendancesystem.repository.StudentClassRepository;
 import com.ty.attendancesystem.repository.TimeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class TimeTableServiceImpl extends BaseServiceImpl<TimeTable,Long> implem
 
     @Override
     public void save(MultipartFile multipartFile) throws IOException {
-        List<TimeTable> timeTables = ExcelHelper.excelToTimeTable(multipartFile.getInputStream());
+        List<TimeTable> timeTables = ExcelImportHelper.excelToTimeTable(multipartFile.getInputStream());
         for (TimeTable timeTable: timeTables) {
             for(int i=0;i<timeTable.getTimeTableCourses().size();i++){
                 timeTable.getTimeTableCourses().get(i).setTimeTable(timeTable);
