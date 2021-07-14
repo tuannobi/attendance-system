@@ -1,6 +1,6 @@
 package com.ty.attendancesystem.helper.export;
 
-import com.ty.attendancesystem.model.Class;
+import com.ty.attendancesystem.model.Course;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ClassExcelExporter {
+public class CourseExcelExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Class> classes;
+    private List<Course> courses;
 
-    public ClassExcelExporter(List<Class> classes) {
-        this.classes = classes;
+    public CourseExcelExporter(List<Course> courses) {
+        this.courses = courses;
         workbook = new XSSFWorkbook();
     }
 
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Classes");
+        sheet = workbook.createSheet("Courses");
 
         Row row = sheet.createRow(0);
 
@@ -35,13 +35,8 @@ public class ClassExcelExporter {
         font.setFontHeight(16);
         style.setFont(font);
 
-        createCell(row, 0, "Class Id", style);
-        createCell(row, 1, "Course Id", style);
-        createCell(row, 2, "Teacher Id", style);
-        createCell(row, 3, "Start date", style);
-        createCell(row, 4, "End date", style);
-        createCell(row, 5, "Number student", style);
-        createCell(row, 6, "Status", style);
+        createCell(row, 0, "Course Id", style);
+        createCell(row, 1, "Name", style);
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -65,17 +60,12 @@ public class ClassExcelExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (Class clazz : classes) {
+        for (Course course : courses) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
 
-            createCell(row, columnCount++, clazz.getId(), style);
-            createCell(row, columnCount++, clazz.getCourse().getId(), style);
-            createCell(row, columnCount++, clazz.getTeacher().getId(), style);
-            createCell(row, columnCount++, clazz.getStartDate().toString(), style);
-            createCell(row, columnCount++, clazz.getEndDate().toString(), style);
-            createCell(row, columnCount++, clazz.getNumberStudent(), style);
-            createCell(row, columnCount++, clazz.getStatus(), style);
+            createCell(row, columnCount++, course.getId(), style);
+            createCell(row, columnCount++, course.getName(), style);
         }
     }
 

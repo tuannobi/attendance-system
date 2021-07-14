@@ -1,6 +1,6 @@
 package com.ty.attendancesystem.helper.export;
 
-import com.ty.attendancesystem.model.Class;
+import com.ty.attendancesystem.model.User;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ClassExcelExporter {
+public class UserExcelExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Class> classes;
+    private List<User> users;
 
-    public ClassExcelExporter(List<Class> classes) {
-        this.classes = classes;
+    public UserExcelExporter(List<User> users) {
+        this.users = users;
         workbook = new XSSFWorkbook();
     }
 
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Classes");
+        sheet = workbook.createSheet("Users");
 
         Row row = sheet.createRow(0);
 
@@ -35,13 +35,14 @@ public class ClassExcelExporter {
         font.setFontHeight(16);
         style.setFont(font);
 
-        createCell(row, 0, "Class Id", style);
-        createCell(row, 1, "Course Id", style);
-        createCell(row, 2, "Teacher Id", style);
-        createCell(row, 3, "Start date", style);
-        createCell(row, 4, "End date", style);
-        createCell(row, 5, "Number student", style);
-        createCell(row, 6, "Status", style);
+        createCell(row, 0, "Id", style);
+        createCell(row, 1, "Username", style);
+        createCell(row, 2, "Email", style);
+        createCell(row, 3, "Phone", style);
+        createCell(row, 4, "Address", style);
+        createCell(row, 5, "Fullname", style);
+        createCell(row, 6, "Birthday", style);
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -65,17 +66,17 @@ public class ClassExcelExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (Class clazz : classes) {
+        for (User course : users) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
 
-            createCell(row, columnCount++, clazz.getId(), style);
-            createCell(row, columnCount++, clazz.getCourse().getId(), style);
-            createCell(row, columnCount++, clazz.getTeacher().getId(), style);
-            createCell(row, columnCount++, clazz.getStartDate().toString(), style);
-            createCell(row, columnCount++, clazz.getEndDate().toString(), style);
-            createCell(row, columnCount++, clazz.getNumberStudent(), style);
-            createCell(row, columnCount++, clazz.getStatus(), style);
+            createCell(row, columnCount++, course.getId(), style);
+            createCell(row, columnCount++, course.getUsername(), style);
+            createCell(row, columnCount++, course.getEmail(), style);
+            createCell(row, columnCount++, course.getPhone(), style);
+            createCell(row, columnCount++, course.getAddress(), style);
+            createCell(row, columnCount++, course.getFullName(), style);
+            createCell(row, columnCount++, course.getBirthday().toString(), style);
         }
     }
 
