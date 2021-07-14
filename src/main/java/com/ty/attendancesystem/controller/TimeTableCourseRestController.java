@@ -33,6 +33,6 @@ public class TimeTableCourseRestController {
     public void delete(@RequestBody TimeTableCourse timeTableCourse) {
 //        String studentId =timeTableCourseService.getStudentIdFromTableCourse(timeTableCourse.getId());
 //        studentClassRepository.deleteStudentFromClassById(studentId,timeTableCourse.getClazz().getId());
-        timeTableCourseService.delete(timeTableCourse);
+        timeTableCourseService.deleteById(timeTableCourse.getId());
     }
 }
