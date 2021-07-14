@@ -69,14 +69,14 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
 
   @Transactional(readOnly = true)
   @Override
-  public int countStatusIsPresentByStudentByClass(String classId, int semester, int year, String studentId) {
-    return attendanceDetailRepository.countStatusIsPresentByStudentByClass(classId,semester,year,studentId);
+  public int countStatusIsPresentByStudentByClass(String classId, String studentId) {
+    return attendanceDetailRepository.countStatusIsPresentByStudentByClass(classId, studentId);
   }
 
   @Transactional(readOnly = true)
   @Override
-  public int countStatusIsAbsentByStudentByClass(String classId, int semester, int year, String studentId) {
-    return attendanceDetailRepository.countStatusIsAbsentByStudentByClass(classId,semester,year,studentId);
+  public int countStatusIsAbsentByStudentByClass(String classId, String studentId) {
+    return attendanceDetailRepository.countStatusIsAbsentByStudentByClass(classId, studentId);
   }
 
 }

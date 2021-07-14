@@ -32,10 +32,8 @@ public class ReportRestController {
         this.attendanceDetailService = attendanceDetailService;
     }
 
-    @GetMapping("/status/{classId}/{semester}/{year}")
-    public StatusObject get(@PathVariable("classId") String classId,
-                            @PathVariable("semester") int semester,
-                            @PathVariable("year") int year) {
+    @GetMapping("/status/{classId}")
+    public StatusObject get(@PathVariable("classId") String classId) {
         //
         List<Student> students = new ArrayList<>();
         //
@@ -49,9 +47,9 @@ public class ReportRestController {
                 student.setId(tempUser.get().getId());
                 student.setName(tempUser.get().getFullName());
             }
-            int present = attendanceDetailService.countStatusIsPresentByStudentByClass(classId, semester, year, tempUser.get().getId());
+            int present = attendanceDetailService.countStatusIsPresentByStudentByClass(classId,tempUser.get().getId());
             student.setPresent(present);
-            int absent = attendanceDetailService.countStatusIsAbsentByStudentByClass(classId, semester, year, tempUser.get().getId());
+            int absent = attendanceDetailService.countStatusIsAbsentByStudentByClass(classId,tempUser.get().getId());
             student.setAbsent(present);
             totalPresent += present;
             totalAbsent += absent;
