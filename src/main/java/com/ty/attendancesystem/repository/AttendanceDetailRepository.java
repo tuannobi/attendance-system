@@ -10,10 +10,23 @@ import java.util.List;
 public interface AttendanceDetailRepository extends CustomRepository<AttendanceDetail, Long> {
 
     @Query(value = "select count(*) from attendance_detail " +
-            "where class_id= :classId " +
+            "where class_id= :classId and status = 1 " +
             "and student_user_id= :studentId and " +
             "time\\:\\:date=current_date",nativeQuery = true)
     int checkIfStudentIsTakeAttendanceOrNot(String studentId, String classId);
+
+    @Modifying
+    @Query(value = "delete from attendance_detail where status=0 and class_id= :classId " +
+            "and student_user_id= :studentId and " +
+            "time\\:\\:date=current_date", nativeQuery = true)
+    int deleteStudentUpdatedAbsentBefore(String studentId, String classId);
+
+    //important
+    @Modifying
+    @Query(value = "update attendance_detail set status=1 where class_id= :classId " +
+            "and student_user_id= :studentId and " +
+            "time\\:\\:date=current_date",nativeQuery = true)
+    int updateStudentPresent(String studentId, String classId);
 
     List<AttendanceDetail> getAttendanceDetailsByStudent_IdOrderByTimeAsc(String studentId);
 

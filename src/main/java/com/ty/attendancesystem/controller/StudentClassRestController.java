@@ -44,7 +44,9 @@ public class StudentClassRestController {
         List<String> userIds = new ArrayList<>();
         for (StudentClass studentClass: studentClasses) {
             Optional<User> user = userService.findById(studentClass.getStudentUserId());
-            userIds.add(user.get().getId());
+            if (user.get().getPhotos() != null && user.get().getPhotos().size() > 0) {
+                userIds.add(user.get().getId());
+            }
         }
         return userIds;
     }
