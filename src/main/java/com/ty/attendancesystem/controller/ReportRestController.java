@@ -36,7 +36,7 @@ public class ReportRestController {
     public StatusObject get(@PathVariable("classId") String classId) {
         //
         List<Student> students = new ArrayList<>();
-        //
+        // get all student from class
         List<StudentClass> studentClasses = studentClassService.getStudentClassByClassId(classId);
         int totalPresent = 0;
         int totalAbsent = 0;

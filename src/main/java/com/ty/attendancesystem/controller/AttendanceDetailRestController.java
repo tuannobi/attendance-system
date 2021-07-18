@@ -8,10 +8,13 @@ import com.ty.attendancesystem.message.SuccessResponse;
 import com.ty.attendancesystem.message.mail.MailRequest;
 import com.ty.attendancesystem.message.sms.SmsRequest;
 import com.ty.attendancesystem.model.AttendanceDetail;
+import com.ty.attendancesystem.model.Class;
 import com.ty.attendancesystem.model.Photo;
+import com.ty.attendancesystem.model.StudentClass;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.service.AttendanceDetailService;
 import com.ty.attendancesystem.service.PhotoService;
+import com.ty.attendancesystem.service.StudentClassService;
 import com.ty.attendancesystem.service.UserService;
 import com.ty.attendancesystem.service.mail.MailSenderService;
 import com.ty.attendancesystem.service.sms.SmsSenderService;
@@ -23,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,15 +44,18 @@ public class AttendanceDetailRestController {
 
     private final PhotoService photoService;
 
+    private final StudentClassService studentClassService;
+
     @Autowired
     public AttendanceDetailRestController(AttendanceDetailService attendanceDetailService,
                                           MailSenderService mailSenderService, SmsSenderService smsSenderService, UserService userService,
-                                          PhotoService photoService){
+                                          PhotoService photoService, StudentClassService studentClassService){
         this.attendanceDetailService = attendanceDetailService;
         this.mailSenderService = mailSenderService;
         this.smsSenderService = smsSenderService;
         this.userService = userService;
         this.photoService = photoService;
+        this.studentClassService = studentClassService;
     }
 
     @GetMapping("/student/{studentId}")
@@ -81,9 +88,28 @@ public class AttendanceDetailRestController {
         return flag;
     }
 
+    //only truyen vao class_Id
+    @PostMapping("/absent")
+    public void updateRestOfStudentIsAbsent(@RequestBody AttendanceDetail attendanceDetail) {
+        List<StudentClass> studentClasses = studentClassService.getStudentClassByClassId(attendanceDetail.getClazz().getId());
+        List<AttendanceDetail> attendanceDetails = new ArrayList<>();
+        for (StudentClass studentClass: studentClasses) {
+            AttendanceDetail temp = new AttendanceDetail();
+            Class clazz = new Class();
+            clazz.setId(attendanceDetail.getClazz().getId());
+            temp.setClazz(clazz);
+            User user = new User();
+            user.setId(studentClass.getStudentUserId());
+            temp.setStudent(user);
+            attendanceDetails.add(temp);
+        }
+        attendanceDetailService.updateAllAbsent(attendanceDetails);
+     }
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody AttendanceDetail attendanceDetail,
                                  @RequestParam(name = "mode", required = false) String mode) {
+        attendanceDetailService.deleteStudentUpdatedAbsentBefore(attendanceDetail.getStudent().getId(), attendanceDetail.getClazz().getId());
         validateAddAttendance(attendanceDetail);
         AttendanceDetail savedAttendance = attendanceDetailService.insert(attendanceDetail);
         if (savedAttendance != null) {

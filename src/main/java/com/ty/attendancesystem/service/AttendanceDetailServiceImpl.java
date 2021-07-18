@@ -42,6 +42,29 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
 //    }
   }
 
+  @Transactional
+  @Override
+  public int updateAllAbsent(List<AttendanceDetail> attendanceDetails) {
+    for (AttendanceDetail attendanceDetail: attendanceDetails) {
+      attendanceDetail.setTime(LocalDateTime.now());
+      attendanceDetail.setStatus(AttendanceStatus.ABSENT);
+    }
+    List<AttendanceDetail> attendanceDetails1 = attendanceDetailRepository.saveAll(attendanceDetails);
+    return attendanceDetails1.size();
+  }
+
+  @Transactional
+  @Override
+  public int deleteStudentUpdatedAbsentBefore(String studentId, String classId) {
+    return attendanceDetailRepository.deleteStudentUpdatedAbsentBefore(studentId, classId);
+  }
+
+  @Transactional
+  @Override
+  public int updateStudentPresent(String studentId, String classId) {
+    return attendanceDetailRepository.updateStudentPresent(studentId,classId);
+  }
+
   @Override
   public List<AttendanceDetail> getAttendanceDetailsStudent(String studentId) {
     return attendanceDetailRepository.getAttendanceDetailsByStudent_IdOrderByTimeAsc(studentId);
