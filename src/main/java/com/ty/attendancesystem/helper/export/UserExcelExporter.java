@@ -54,7 +54,7 @@ public class UserExcelExporter {
         } else if (value instanceof Boolean) {
             cell.setCellValue((Boolean) value);
         }else {
-            cell.setCellValue((String) value);
+            cell.setCellValue(String.valueOf(value));
         }
         cell.setCellStyle(style);
     }
