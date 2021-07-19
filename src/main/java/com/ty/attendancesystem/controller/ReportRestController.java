@@ -51,9 +51,9 @@ public class ReportRestController {
             student.setPresent(present);
             int absent = attendanceDetailService.countStatusIsAbsentByStudentByClass(classId,tempUser.get().getId());
             student.setAbsent(present);
+            students.add(student);
             totalPresent += present;
             totalAbsent += absent;
-            students.add(student);
         }
         StatusObject statusObject = new StatusObject();
         statusObject.setStudents(students);
