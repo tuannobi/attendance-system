@@ -42,6 +42,7 @@ public class UserExcelExporter {
         createCell(row, 4, "Address", style);
         createCell(row, 5, "Fullname", style);
         createCell(row, 6, "Birthday", style);
+        createCell(row,7,"Role_Id",style);
 
     }
 
@@ -77,6 +78,7 @@ public class UserExcelExporter {
             createCell(row, columnCount++, course.getAddress(), style);
             createCell(row, columnCount++, course.getFullName(), style);
             createCell(row, columnCount++, course.getBirthday().toString(), style);
+            createCell(row,columnCount++,course.getRoles().iterator().next().getId(),style);
         }
     }
 

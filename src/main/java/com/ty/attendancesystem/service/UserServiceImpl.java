@@ -2,6 +2,8 @@ package com.ty.attendancesystem.service;
 
 import com.ty.attendancesystem.base.BaseServiceImpl;
 import com.ty.attendancesystem.exception.ServiceException;
+import com.ty.attendancesystem.helper.ExcelImportHelper;
+import com.ty.attendancesystem.model.StudentClass;
 import com.ty.attendancesystem.model.User;
 import com.ty.attendancesystem.repository.UserRepository;
 import com.ty.attendancesystem.util.DateTimeConvertUtil;
@@ -10,7 +12,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +91,16 @@ public class UserServiceImpl extends BaseServiceImpl<User,String> implements Use
 
   @Transactional
   @Override
+  public void importUsers(MultipartFile multipartFile) throws IOException {
+    List<User> users = ExcelImportHelper.excelToUsers(multipartFile.getInputStream());
+    for (User user: users) {
+      user.setPassword(passwordEncoder.encode("123456"));
+    }
+    userRepository.saveAll(users);
+  }
+
+  @Transactional
+  @Override
   public void delete(User user) {
     Boolean isExistedUser = userRepository.existsById(user.getId());
     if (!isExistedUser) {
@@ -94,4 +108,6 @@ public class UserServiceImpl extends BaseServiceImpl<User,String> implements Use
     }
     super.delete(user);
   }
+
+
 }

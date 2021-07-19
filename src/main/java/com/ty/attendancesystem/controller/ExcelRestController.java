@@ -82,6 +82,16 @@ public class ExcelRestController {
                 ResponseMessage.ADD_SUCCESS), HttpStatus.OK);
     }
 
+    @PostMapping("/users")
+    public ResponseEntity<?> importUsers(@RequestParam("file")MultipartFile multipartFile) throws IOException {
+        if(ExcelImportHelper.hasExcelFormat(multipartFile)){
+            userService.importUsers(multipartFile);
+        }
+        return new ResponseEntity<>(new SuccessResponse("",
+                HttpStatus.OK.value(),
+                ResponseMessage.ADD_SUCCESS), HttpStatus.OK);
+    }
+
     //import
     @GetMapping("/export/classes")
     public void exportClassesToExcel(HttpServletResponse response) throws IOException {
