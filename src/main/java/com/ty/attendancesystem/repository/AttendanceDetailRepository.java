@@ -28,6 +28,11 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
             "time\\:\\:date=current_date",nativeQuery = true)
     int updateStudentPresent(String studentId, String classId);
 
+    @Query(value = "select * from attendance_detail where status=0 class_id= :classId " +
+            "and student_user_id= :studentId and " +
+            "time\\:\\:date=current_date", nativeQuery = true)
+    int checkAbsentBefore(String classId, String studentId);
+
     List<AttendanceDetail> getAttendanceDetailsByStudent_IdOrderByTimeAsc(String studentId);
 
     @Modifying

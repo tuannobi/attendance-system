@@ -94,16 +94,20 @@ public class AttendanceDetailRestController {
         List<StudentClass> studentClasses = studentClassService.getStudentClassByClassId(attendanceDetail.getClazz().getId());
         List<AttendanceDetail> attendanceDetails = new ArrayList<>();
         for (StudentClass studentClass: studentClasses) {
-            AttendanceDetail temp = new AttendanceDetail();
-            Class clazz = new Class();
-            clazz.setId(attendanceDetail.getClazz().getId());
-            temp.setClazz(clazz);
-            User user = new User();
-            user.setId(studentClass.getStudentUserId());
-            temp.setStudent(user);
-            attendanceDetails.add(temp);
+            if (attendanceDetailService.checkAbsentBefore(attendanceDetail.getClazz().getId(), studentClass.getStudentUserId())<=0) {
+                AttendanceDetail temp = new AttendanceDetail();
+                Class clazz = new Class();
+                clazz.setId(attendanceDetail.getClazz().getId());
+                temp.setClazz(clazz);
+                User user = new User();
+                user.setId(studentClass.getStudentUserId());
+                temp.setStudent(user);
+                attendanceDetails.add(temp);
+            }
         }
-        attendanceDetailService.updateAllAbsent(attendanceDetails);
+        if (attendanceDetails.size()>0) {
+            attendanceDetailService.updateAllAbsent(attendanceDetails);
+        }
      }
 
     @PostMapping

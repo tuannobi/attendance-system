@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface AttendanceDetailService extends BaseService<AttendanceDetail, Long> {
     AttendanceDetail insert(AttendanceDetail attendanceDetail);
     int updateAllAbsent(List<AttendanceDetail> attendanceDetails);
+    int checkAbsentBefore(String classId, String studentId);
     int deleteStudentUpdatedAbsentBefore(String studentId, String classId);
     int updateStudentPresent(String studentId, String classId);
     List<AttendanceDetail> getAttendanceDetailsStudent(String studentId);
