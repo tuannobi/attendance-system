@@ -61,8 +61,8 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
 
   @Transactional
   @Override
-  public int deleteStudentUpdatedAbsentBefore(String studentId, String classId) {
-    return attendanceDetailRepository.deleteStudentUpdatedAbsentBefore(studentId, classId);
+  public void deleteStudentUpdatedAbsentBefore(String studentId, String classId) {
+    attendanceDetailRepository.deleteStudentUpdatedAbsentBefore(studentId, classId);
   }
 
   @Transactional

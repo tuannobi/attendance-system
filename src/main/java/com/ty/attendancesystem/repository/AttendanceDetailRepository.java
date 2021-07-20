@@ -19,7 +19,7 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
     @Query(value = "delete from attendance_detail where status=0 and class_id= :classId " +
             "and student_user_id= :studentId and " +
             "time\\:\\:date=current_date", nativeQuery = true)
-    int deleteStudentUpdatedAbsentBefore(String studentId, String classId);
+    void deleteStudentUpdatedAbsentBefore(String studentId, String classId);
 
     //important
     @Modifying
@@ -28,7 +28,7 @@ public interface AttendanceDetailRepository extends CustomRepository<AttendanceD
             "time\\:\\:date=current_date",nativeQuery = true)
     int updateStudentPresent(String studentId, String classId);
 
-    @Query(value = "select count(*) from attendance_detail where status=0 and class_id= :classId " +
+    @Query(value = "select count(*) from attendance_detail where class_id= :classId " +
             "and student_user_id= :studentId and " +
             "time\\:\\:date=current_date", nativeQuery = true)
     int checkAbsentBefore(String classId, String studentId);

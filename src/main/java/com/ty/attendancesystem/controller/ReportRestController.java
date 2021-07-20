@@ -50,7 +50,7 @@ public class ReportRestController {
             int present = attendanceDetailService.countStatusIsPresentByStudentByClass(classId,tempUser.get().getId());
             student.setPresent(present);
             int absent = attendanceDetailService.countStatusIsAbsentByStudentByClass(classId,tempUser.get().getId());
-            student.setAbsent(present);
+            student.setAbsent(absent);
             students.add(student);
             totalPresent = totalAbsent + present;
             totalAbsent = totalPresent + absent;

@@ -113,7 +113,7 @@ public class AttendanceDetailRestController {
     @PostMapping
     public ResponseEntity<?> add(@RequestBody AttendanceDetail attendanceDetail,
                                  @RequestParam(name = "mode", required = false) String mode) {
-        attendanceDetailService.deleteStudentUpdatedAbsentBefore(attendanceDetail.getStudent().getId(), attendanceDetail.getClazz().getId());
+//        attendanceDetailService.deleteStudentUpdatedAbsentBefore(attendanceDetail.getStudent().getId(), attendanceDetail.getClazz().getId());
         validateAddAttendance(attendanceDetail);
         AttendanceDetail savedAttendance = attendanceDetailService.insert(attendanceDetail);
         if (savedAttendance != null) {
