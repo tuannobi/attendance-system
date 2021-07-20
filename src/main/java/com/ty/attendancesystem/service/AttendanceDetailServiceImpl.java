@@ -48,6 +48,7 @@ public class AttendanceDetailServiceImpl extends BaseServiceImpl<AttendanceDetai
     for (AttendanceDetail attendanceDetail: attendanceDetails) {
       attendanceDetail.setTime(LocalDateTime.now());
       attendanceDetail.setStatus(AttendanceStatus.ABSENT);
+      attendanceDetailRepository.deleteStudentPresentBefore(attendanceDetail.getStudent().getId(), attendanceDetail.getClazz().getId());
     }
     List<AttendanceDetail> attendanceDetails1 = attendanceDetailRepository.saveAll(attendanceDetails);
     return attendanceDetails1.size();
